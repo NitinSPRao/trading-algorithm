@@ -41,184 +41,13 @@ def calculate_indicators(merged_df):
       - 45-day simple moving average (SMA) for TECL using the 'Open_tecl' column.
       - 30-day weighted moving average (WMA) for VIX using the 'OPEN_vix' column.
     """
-    merged_df['SMA_tecl'] = merged_df['Open_tecl'].rolling(window=45, min_periods=45).mean()
+    merged_df['SMA_tecl'] = merged_df['Open_tecl'].rolling(window=30, min_periods=30).mean()
     weights = np.arange(1, 31)
     merged_df['WMA_vix'] = merged_df['OPEN_vix'].rolling(window=30, min_periods=30).apply(
         lambda x: np.dot(x, weights) / weights.sum(), raw=True
     )
     return merged_df
 
-# def backtest_trading(merged_df, initial_fund=10000):
-#     """
-#     Simulate the trading strategy day by day.
-    
-#     Trading logic:
-#       - Start with initial_fund dollars.
-#       - If not in a position:
-#           * If TECL < 0.75 * SMA_tecl, buy immediately.
-#           * Else, if VIX > 1.04 * WMA_vix, trigger a waiting period of 5 days.
-#             Once the waiting period is over, if TECL < 1.25 * SMA_tecl, then buy.
-#       - If in a position:
-#           * Sell when TECL price >= 1.05 * purchase price.
-    
-#     Returns a list of trade records and the final fund value.
-#     """
-#     fund = initial_fund
-#     in_position = False
-#     purchase_price = None
-#     waiting_until = None
-#     trades = []
-    
-#     # Iterate day by day (index is Date)
-#     for current_date, row in merged_df.iterrows():
-#         tecl_price = row['Open_tecl']
-#         vix_price = row['OPEN_vix']
-#         sma = row['SMA_tecl']
-#         wma = row['WMA_vix']
-        
-#         if pd.isna(sma) and pd.isna(wma):
-#             continue
-        
-#         # If in a position, check sell criteria:
-#         if in_position:
-#             if tecl_price >= purchase_price * 1.0575:
-#                 # Sell entire position
-#                 sell_price = tecl_price
-#                 fund = fund * (sell_price / purchase_price)
-#                 trades.append({
-#                     'date': current_date,
-#                     'action': 'sell',
-#                     'price': sell_price,
-#                     'fund': fund
-#                 })
-#                 in_position = False
-#                 purchase_price = None
-#                 waiting_until = None
-#             # continue
-        
-#         # Not in position:
-#         if waiting_until is not None and not in_position:
-#             if current_date >= waiting_until:
-#                 # Waiting period ended; check if TECL < 1.25 * SMA_tecl
-#                 if tecl_price < 1.25 * sma:
-#                     purchase_price = tecl_price
-#                     in_position = True
-#                     trades.append({
-#                         'date': current_date,
-#                         'action': 'buy (after wait)',
-#                         'price': tecl_price,
-#                         'fund': fund
-#                     })
-#                 waiting_until = None
-#             continue
-        
-#         # Check immediate entry condition (Second criteria): TECL < 0.75 * SMA_tecl
-#         if tecl_price < 0.75 * sma and not in_position:
-#             purchase_price = tecl_price
-#             in_position = True
-#             trades.append({
-#                 'date': current_date,
-#                 'action': 'buy (immediate low TECL)',
-#                 'price': tecl_price,
-#                 'fund': fund
-#             })
-#             continue
-        
-#         # Check first criteria: if VIX > 1.04 * WMA_vix, trigger waiting period.
-#         if vix_price > 1.04 * wma:
-#             # Change this to be 5 trading days instead of 7 days
-#             waiting_until = current_date + pd.offsets.BDay(4)
-#             trades.append({
-#                 'date': current_date,
-#                 'action': 'waiting signal triggered',
-#                 'vix': vix_price,
-#                 'WMA_vix': wma,
-#                 'wait_until': waiting_until
-#             })
-            
-#     return trades, fund
-
-# def backtest_trading(merged_df, initial_fund=10000):
-#     """
-#     Simulate the trading strategy day by day.
-
-#     Trading logic:
-#       - Start with initial_fund dollars.
-#       - If not in a position:
-#           * If TECL < 0.75 * SMA_tecl, buy immediately.
-#           * Else, if TECL < 1.25 * SMA_tecl, then look back 4 business days.
-#                 If on that day VIX > 1.04 * WMA_vix, buy.
-#       - If in a position:
-#           * Sell when TECL price >= 1.0575 * purchase price.
-
-#     Returns a list of trade records and the final fund value.
-#     """
-#     fund = initial_fund
-#     in_position = False
-#     purchase_price = None
-#     trades = []
-    
-#     # Iterate day by day (index is Date)
-#     for current_date, row in merged_df.iterrows():
-#         tecl_price = row['Open_tecl']
-#         # Although we don't use today's VIX for the VIX condition, we still need it for indicator validation.
-#         vix_price = row['OPEN_vix']
-#         sma = row['SMA_tecl']
-#         wma = row['WMA_vix']
-        
-#         # Skip days until both indicators are valid
-#         if pd.isna(sma) or pd.isna(wma):
-#             continue
-        
-#         # If in a position, check sell criteria:
-#         if in_position:
-#             if tecl_price >= purchase_price * 1.0575:
-#                 sell_price = tecl_price
-#                 fund = fund * (sell_price / purchase_price)
-#                 trades.append({
-#                     'date': current_date,
-#                     'action': 'sell',
-#                     'price': sell_price,
-#                     'fund': fund
-#                 })
-#                 in_position = False
-#                 purchase_price = None
-#             # When in a position, do not consider any new buy signals.
-#             continue
-        
-#         # Not in position:
-#         # 1. Immediate buy if TECL < 0.75 * SMA_tecl
-#         if tecl_price < 0.75 * sma:
-#             purchase_price = tecl_price
-#             in_position = True
-#             trades.append({
-#                 'date': current_date,
-#                 'action': 'buy (immediate low TECL)',
-#                 'price': tecl_price,
-#                 'fund': fund
-#             })
-#             continue
-        
-#         # 2. Check if TECL < 1.25 * SMA_tecl. If yes, check VIX condition from 4 business days ago.
-#         if tecl_price < 1.25 * sma:
-#             prev_date = current_date - pd.offsets.BDay(4)
-#             if prev_date in merged_df.index:
-#                 prev_row = merged_df.loc[prev_date]
-#                 if prev_row['OPEN_vix'] > 1.04 * prev_row['WMA_vix']:
-#                     purchase_price = tecl_price
-#                     in_position = True
-#                     trades.append({
-#                         'date': current_date,
-#                         'action': 'buy (with VIX condition)',
-#                         'price': tecl_price,
-#                         'fund': fund,
-#                         'prev_date': prev_date,
-#                         'prev_vix': prev_row['OPEN_vix'],
-#                         'prev_WMA_vix': prev_row['WMA_vix']
-#                     })
-#                     continue
-
-#     return trades, fund
 def annualized_return(starting_fund, final_fund, start_date, end_date):
     """
     Calculate the annualized return of an investment.
@@ -278,7 +107,7 @@ def backtest_trading(merged_df, initial_fund=10000):
 
         # If in a position, check sell criteria:
         if in_position:
-            if tecl_price >= purchase_price * 1.0575:
+            if tecl_price >= purchase_price * 1.058:
                 sell_price = tecl_price
                 fund = fund * (sell_price / purchase_price)
                 trades.append({
@@ -360,6 +189,3 @@ if __name__ == '__main__':
     start_date = '2008-12-17'
     end_date = '2025-02-21'
     
-    annualized_return_value = annualized_return(starting_fund, final_fund, start_date, end_date)
-    print(f"The annualized return is: {annualized_return_value:.2f}%")
-    # print(merged_df.to_string())
