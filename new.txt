@@ -1,199 +1,201 @@
-{'date': Timestamp('2009-02-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.2838, 'fund': 10000, 'prev_date': Timestamp('2009-02-17 00:00:00'), 'prev_vix': 48.14, 'prev_WMA_vix': 45.519268817204306}
-{'date': Timestamp('2009-03-19 00:00:00'), 'action': 'sell', 'price': 0.3283, 'fund': 11568.00563777308}
-{'date': Timestamp('2009-06-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.5234, 'fund': 11568.00563777308, 'prev_date': Timestamp('2009-06-18 00:00:00'), 'prev_vix': 31.54, 'prev_WMA_vix': 30.200516129032263}
-{'date': Timestamp('2009-06-26 00:00:00'), 'action': 'sell', 'price': 0.5566, 'fund': 12301.780546397586}
-{'date': Timestamp('2009-07-10 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.4891, 'fund': 12301.780546397586, 'prev_date': Timestamp('2009-07-06 00:00:00'), 'prev_vix': 30.32, 'prev_WMA_vix': 28.875075268817206}
-{'date': Timestamp('2009-07-14 00:00:00'), 'action': 'sell', 'price': 0.5321, 'fund': 13383.311038107046}
-{'date': Timestamp('2009-08-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.7697, 'fund': 13383.311038107046, 'prev_date': Timestamp('2009-08-18 00:00:00'), 'prev_vix': 27.89, 'prev_WMA_vix': 25.251118279569894}
-{'date': Timestamp('2009-09-11 00:00:00'), 'action': 'sell', 'price': 0.8359, 'fund': 14534.376636031802}
-{'date': Timestamp('2009-10-02 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.7695, 'fund': 14534.376636031802, 'prev_date': Timestamp('2009-09-28 00:00:00'), 'prev_vix': 26.26, 'prev_WMA_vix': 24.90309677419355}
-{'date': Timestamp('2009-10-06 00:00:00'), 'action': 'sell', 'price': 0.8189, 'fund': 15467.447728715326}
-{'date': Timestamp('2009-10-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8764, 'fund': 15467.447728715326, 'prev_date': Timestamp('2009-10-02 00:00:00'), 'prev_vix': 29.34, 'prev_WMA_vix': 25.196107526881722}
-{'date': Timestamp('2009-10-14 00:00:00'), 'action': 'sell', 'price': 0.9626, 'fund': 16988.778164834977}
-{'date': Timestamp('2009-11-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8296, 'fund': 16988.778164834977, 'prev_date': Timestamp('2009-10-28 00:00:00'), 'prev_vix': 24.83, 'prev_WMA_vix': 23.610408602150542}
-{'date': Timestamp('2009-11-05 00:00:00'), 'action': 'sell', 'price': 0.8943, 'fund': 18313.722652859113}
-{'date': Timestamp('2009-11-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.9424, 'fund': 18313.722652859113, 'prev_date': Timestamp('2009-11-03 00:00:00'), 'prev_vix': 30.62, 'prev_WMA_vix': 24.65795698924731}
-{'date': Timestamp('2009-11-11 00:00:00'), 'action': 'sell', 'price': 0.9975, 'fund': 19384.484662804505}
-{'date': Timestamp('2009-12-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8744, 'fund': 19384.484662804505, 'prev_date': Timestamp('2009-11-27 00:00:00'), 'prev_vix': 25.75, 'prev_WMA_vix': 23.818301075268817}
-{'date': Timestamp('2009-12-22 00:00:00'), 'action': 'sell', 'price': 0.9502, 'fund': 21064.887153015603}
-{'date': Timestamp('2010-01-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8666, 'fund': 21064.887153015603, 'prev_date': Timestamp('2010-01-22 00:00:00'), 'prev_vix': 22.27, 'prev_WMA_vix': 19.46894623655914}
-{'date': Timestamp('2010-03-08 00:00:00'), 'action': 'sell', 'price': 0.9222, 'fund': 22416.384644023758}
-{'date': Timestamp('2010-04-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.1201, 'fund': 22416.384644023758, 'prev_date': Timestamp('2010-04-19 00:00:00'), 'prev_vix': 19.14, 'prev_WMA_vix': 17.046817204301075}
-{'date': Timestamp('2011-01-06 00:00:00'), 'action': 'sell', 'price': 1.2035, 'fund': 24085.455690637074}
-{'date': Timestamp('2011-01-14 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.2688, 'fund': 24085.455690637074, 'prev_date': Timestamp('2011-01-10 00:00:00'), 'prev_vix': 18.35, 'prev_WMA_vix': 17.5089247311828}
-{'date': Timestamp('2011-02-04 00:00:00'), 'action': 'sell', 'price': 1.35, 'fund': 25626.86410967848}
-{'date': Timestamp('2011-02-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.3368, 'fund': 25626.86410967848, 'prev_date': Timestamp('2011-02-22 00:00:00'), 'prev_vix': 19.46, 'prev_WMA_vix': 17.04531182795699}
-{'date': Timestamp('2012-02-29 00:00:00'), 'action': 'sell', 'price': 1.4403, 'fund': 27610.99070703913}
-{'date': Timestamp('2012-03-12 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.433, 'fund': 27610.99070703913, 'prev_date': Timestamp('2012-03-06 00:00:00'), 'prev_vix': 20.57, 'prev_WMA_vix': 18.71638709677419}
-{'date': Timestamp('2012-03-14 00:00:00'), 'action': 'sell', 'price': 1.5348, 'fund': 29572.46932111909}
-{'date': Timestamp('2012-04-11 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.5673, 'fund': 29572.46932111909, 'prev_date': Timestamp('2012-04-04 00:00:00'), 'prev_vix': 17.07, 'prev_WMA_vix': 16.001526881720434}
-{'date': Timestamp('2013-08-13 00:00:00'), 'action': 'sell', 'price': 1.66, 'fund': 31321.571538989145}
-{'date': Timestamp('2013-08-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.5768, 'fund': 31321.571538989145, 'prev_date': Timestamp('2013-08-15 00:00:00'), 'prev_vix': 14.14, 'prev_WMA_vix': 13.143655913978495}
-{'date': Timestamp('2013-09-10 00:00:00'), 'action': 'sell', 'price': 1.6695, 'fund': 33162.965299557574}
-{'date': Timestamp('2013-09-13 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.6593, 'fund': 33162.965299557574, 'prev_date': Timestamp('2013-09-09 00:00:00'), 'prev_vix': 15.86, 'prev_WMA_vix': 15.223677419354837}
-{'date': Timestamp('2013-09-20 00:00:00'), 'action': 'sell', 'price': 1.7635, 'fund': 35245.5187764538}
-{'date': Timestamp('2013-10-04 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.644, 'fund': 35245.5187764538, 'prev_date': Timestamp('2013-09-30 00:00:00'), 'prev_vix': 17.49, 'prev_WMA_vix': 14.849290322580643}
-{'date': Timestamp('2013-10-18 00:00:00'), 'action': 'sell', 'price': 1.787, 'fund': 38311.27862136432}
-{'date': Timestamp('2013-10-22 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.8768, 'fund': 38311.27862136432, 'prev_date': Timestamp('2013-10-16 00:00:00'), 'prev_vix': 17.14, 'prev_WMA_vix': 16.385935483870966}
-{'date': Timestamp('2013-11-15 00:00:00'), 'action': 'sell', 'price': 1.9893, 'fund': 40607.75072542628}
-{'date': Timestamp('2013-12-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.0923, 'fund': 40607.75072542628, 'prev_date': Timestamp('2013-12-02 00:00:00'), 'prev_vix': 13.91, 'prev_WMA_vix': 13.061913978494623}
-{'date': Timestamp('2013-12-24 00:00:00'), 'action': 'sell', 'price': 2.2247, 'fund': 43177.39475163975}
-{'date': Timestamp('2014-01-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.0045, 'fund': 43177.39475163975, 'prev_date': Timestamp('2014-01-23 00:00:00'), 'prev_vix': 13.67, 'prev_WMA_vix': 13.029591397849462}
-{'date': Timestamp('2014-02-10 00:00:00'), 'action': 'sell', 'price': 2.1343, 'fund': 45973.31684630817}
-{'date': Timestamp('2014-02-12 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.2523, 'fund': 45973.31684630817, 'prev_date': Timestamp('2014-02-06 00:00:00'), 'prev_vix': 19.09, 'prev_WMA_vix': 15.7125376344086}
-{'date': Timestamp('2014-03-05 00:00:00'), 'action': 'sell', 'price': 2.3958, 'fund': 48902.398659319406}
-{'date': Timestamp('2014-03-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.4193, 'fund': 48902.398659319406, 'prev_date': Timestamp('2014-03-03 00:00:00'), 'prev_vix': 16.47, 'prev_WMA_vix': 15.502516129032259}
-{'date': Timestamp('2014-05-27 00:00:00'), 'action': 'sell', 'price': 2.5925, 'fund': 52403.36813304905}
-{'date': Timestamp('2014-06-20 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.7673, 'fund': 52403.36813304905, 'prev_date': Timestamp('2014-06-16 00:00:00'), 'prev_vix': 12.65, 'prev_WMA_vix': 12.020043010752687}
-{'date': Timestamp('2014-07-07 00:00:00'), 'action': 'sell', 'price': 2.941, 'fund': 55692.662768509836}
-{'date': Timestamp('2014-07-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.045, 'fund': 55692.662768509836, 'prev_date': Timestamp('2014-07-10 00:00:00'), 'prev_vix': 13.22, 'prev_WMA_vix': 11.609698924731186}
-{'date': Timestamp('2014-08-25 00:00:00'), 'action': 'sell', 'price': 3.2417, 'fund': 59290.28075424575}
-{'date': Timestamp('2014-09-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.1145, 'fund': 59290.28075424575, 'prev_date': Timestamp('2014-09-10 00:00:00'), 'prev_vix': 13.36, 'prev_WMA_vix': 12.704559139784946}
-{'date': Timestamp('2014-09-19 00:00:00'), 'action': 'sell', 'price': 3.3278, 'fund': 63350.84164199037}
-{'date': Timestamp('2014-09-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.048, 'fund': 63350.84164199037, 'prev_date': Timestamp('2014-09-23 00:00:00'), 'prev_vix': 14.82, 'prev_WMA_vix': 12.81556989247312}
-{'date': Timestamp('2014-10-31 00:00:00'), 'action': 'sell', 'price': 3.238, 'fund': 67299.8770461827}
-{'date': Timestamp('2014-12-15 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.3193, 'fund': 67299.8770461827, 'prev_date': Timestamp('2014-12-09 00:00:00'), 'prev_vix': 16.23, 'prev_WMA_vix': 13.541591397849462}
-{'date': Timestamp('2014-12-19 00:00:00'), 'action': 'sell', 'price': 3.5608, 'fund': 72196.36736240993}
-{'date': Timestamp('2014-12-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.7208, 'fund': 72196.36736240993, 'prev_date': Timestamp('2014-12-17 00:00:00'), 'prev_vix': 23.9, 'prev_WMA_vix': 15.891935483870967}
-{'date': Timestamp('2015-03-03 00:00:00'), 'action': 'sell', 'price': 3.9733, 'fund': 77095.73920690804}
-{'date': Timestamp('2015-03-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.467, 'fund': 77095.73920690804, 'prev_date': Timestamp('2015-03-10 00:00:00'), 'prev_vix': 16.47, 'prev_WMA_vix': 15.40279569892473}
-{'date': Timestamp('2015-03-19 00:00:00'), 'action': 'sell', 'price': 3.737, 'fund': 83099.73389564907}
-{'date': Timestamp('2015-03-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.7583, 'fund': 83099.73389564907, 'prev_date': Timestamp('2015-03-17 00:00:00'), 'prev_vix': 16.31, 'prev_WMA_vix': 15.375225806451612}
-{'date': Timestamp('2015-05-19 00:00:00'), 'action': 'sell', 'price': 3.98, 'fund': 88001.74038918747}
-{'date': Timestamp('2015-06-02 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.913, 'fund': 88001.74038918747, 'prev_date': Timestamp('2015-05-27 00:00:00'), 'prev_vix': 14.16, 'prev_WMA_vix': 13.357376344086022}
-{'date': Timestamp('2016-07-20 00:00:00'), 'action': 'sell', 'price': 4.193, 'fund': 94298.82378018479}
-{'date': Timestamp('2016-08-30 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 4.635, 'fund': 94298.82378018479, 'prev_date': Timestamp('2016-08-24 00:00:00'), 'prev_vix': 12.7, 'prev_WMA_vix': 12.208451612903227}
-{'date': Timestamp('2016-10-11 00:00:00'), 'action': 'sell', 'price': 4.905, 'fund': 99791.95914602082}
-{'date': Timestamp('2016-10-18 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 4.811, 'fund': 99791.95914602082, 'prev_date': Timestamp('2016-10-12 00:00:00'), 'prev_vix': 15.53, 'prev_WMA_vix': 14.104752688172043}
-{'date': Timestamp('2016-12-14 00:00:00'), 'action': 'sell', 'price': 5.181, 'fund': 107466.66812212304}
-{'date': Timestamp('2017-01-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 5.195, 'fund': 107466.66812212304, 'prev_date': Timestamp('2016-12-29 00:00:00'), 'prev_vix': 13.15, 'prev_WMA_vix': 12.399161290322581}
-{'date': Timestamp('2017-01-25 00:00:00'), 'action': 'sell', 'price': 5.687, 'fund': 117644.45459297666}
-{'date': Timestamp('2017-02-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 5.71, 'fund': 117644.45459297666, 'prev_date': Timestamp('2017-01-31 00:00:00'), 'prev_vix': 12.29, 'prev_WMA_vix': 11.797698924731181}
-{'date': Timestamp('2017-02-15 00:00:00'), 'action': 'sell', 'price': 6.085, 'fund': 125370.6665846345}
-{'date': Timestamp('2017-02-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 6.405, 'fund': 125370.6665846345, 'prev_date': Timestamp('2017-02-16 00:00:00'), 'prev_vix': 12.02, 'prev_WMA_vix': 11.495354838709678}
-{'date': Timestamp('2017-03-21 00:00:00'), 'action': 'sell', 'price': 6.803, 'fund': 133161.0686612441}
-{'date': Timestamp('2017-03-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 6.522, 'fund': 133161.0686612441, 'prev_date': Timestamp('2017-03-22 00:00:00'), 'prev_vix': 12.95, 'prev_WMA_vix': 11.773978494623657}
-{'date': Timestamp('2017-04-25 00:00:00'), 'action': 'sell', 'price': 6.944, 'fund': 141777.1329015147}
-{'date': Timestamp('2017-05-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 7.648, 'fund': 141777.1329015147, 'prev_date': Timestamp('2017-05-17 00:00:00'), 'prev_vix': 11.89, 'prev_WMA_vix': 11.253763440860215}
-{'date': Timestamp('2017-06-05 00:00:00'), 'action': 'sell', 'price': 8.166, 'fund': 151379.71590922715}
-{'date': Timestamp('2017-06-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 7.46, 'fund': 151379.71590922715, 'prev_date': Timestamp('2017-06-12 00:00:00'), 'prev_vix': 11.19, 'prev_WMA_vix': 10.693892473118279}
-{'date': Timestamp('2017-06-26 00:00:00'), 'action': 'sell', 'price': 7.918, 'fund': 160673.53760982046}
-{'date': Timestamp('2017-07-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 7.075, 'fund': 160673.53760982046, 'prev_date': Timestamp('2017-06-28 00:00:00'), 'prev_vix': 11.17, 'prev_WMA_vix': 10.566688172043012}
-{'date': Timestamp('2017-07-12 00:00:00'), 'action': 'sell', 'price': 7.68, 'fund': 174413.1122040171}
-{'date': Timestamp('2017-08-15 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 8.529, 'fund': 174413.1122040171, 'prev_date': Timestamp('2017-08-09 00:00:00'), 'prev_vix': 11.49, 'prev_WMA_vix': 10.241612903225805}
-{'date': Timestamp('2017-10-02 00:00:00'), 'action': 'sell', 'price': 9.023, 'fund': 184515.12620668852}
-{'date': Timestamp('2017-10-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 9.758, 'fund': 184515.12620668852, 'prev_date': Timestamp('2017-10-18 00:00:00'), 'prev_vix': 10.34, 'prev_WMA_vix': 9.915397849462366}
-{'date': Timestamp('2017-10-30 00:00:00'), 'action': 'sell', 'price': 10.571, 'fund': 199888.23520505274}
-{'date': Timestamp('2017-11-01 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 10.904, 'fund': 199888.23520505274, 'prev_date': Timestamp('2017-10-26 00:00:00'), 'prev_vix': 11.17, 'prev_WMA_vix': 10.141075268817204}
-{'date': Timestamp('2017-11-28 00:00:00'), 'action': 'sell', 'price': 11.577, 'fund': 212225.4309399207}
-{'date': Timestamp('2017-12-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 10.653, 'fund': 212225.4309399207, 'prev_date': Timestamp('2017-12-01 00:00:00'), 'prev_vix': 11.19, 'prev_WMA_vix': 10.634709677419355}
-{'date': Timestamp('2017-12-13 00:00:00'), 'action': 'sell', 'price': 11.337, 'fund': 225851.84554265285}
-{'date': Timestamp('2018-01-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 12.524, 'fund': 225851.84554265285, 'prev_date': Timestamp('2018-01-02 00:00:00'), 'prev_vix': 10.95, 'prev_WMA_vix': 10.10883870967742}
-{'date': Timestamp('2018-01-19 00:00:00'), 'action': 'sell', 'price': 13.349, 'fund': 240729.50224759447}
-{'date': Timestamp('2018-01-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 13.846, 'fund': 240729.50224759447, 'prev_date': Timestamp('2018-01-17 00:00:00'), 'prev_vix': 11.35, 'prev_WMA_vix': 9.926301075268816}
-{'date': Timestamp('2018-03-13 00:00:00'), 'action': 'sell', 'price': 14.799, 'fund': 257298.56303352237}
-{'date': Timestamp('2018-03-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 11.066, 'fund': 257298.56303352237, 'prev_date': Timestamp('2018-03-23 00:00:00'), 'prev_vix': 24.02, 'prev_WMA_vix': 18.463268817204302}
-{'date': Timestamp('2018-04-05 00:00:00'), 'action': 'sell', 'price': 11.708, 'fund': 272225.87890804984}
-{'date': Timestamp('2018-04-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 10.965, 'fund': 272225.87890804984, 'prev_date': Timestamp('2018-04-03 00:00:00'), 'prev_vix': 23.03, 'prev_WMA_vix': 19.629827956989246}
-{'date': Timestamp('2018-04-12 00:00:00'), 'action': 'sell', 'price': 11.75, 'fund': 291714.9181185212}
-{'date': Timestamp('2018-06-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 14.73, 'fund': 291714.9181185212, 'prev_date': Timestamp('2018-05-30 00:00:00'), 'prev_vix': 16.6, 'prev_WMA_vix': 14.23989247311828}
-{'date': Timestamp('2018-07-24 00:00:00'), 'action': 'sell', 'price': 15.814, 'fund': 313182.60116268124}
-{'date': Timestamp('2018-08-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.089, 'fund': 313182.60116268124, 'prev_date': Timestamp('2018-07-31 00:00:00'), 'prev_vix': 13.98, 'prev_WMA_vix': 13.434365591397848}
-{'date': Timestamp('2018-08-27 00:00:00'), 'action': 'sell', 'price': 16.3, 'fund': 338317.74133154645}
-{'date': Timestamp('2018-09-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.42, 'fund': 338317.74133154645, 'prev_date': Timestamp('2018-08-31 00:00:00'), 'prev_vix': 13.54, 'prev_WMA_vix': 12.65298924731183}
-{'date': Timestamp('2018-09-14 00:00:00'), 'action': 'sell', 'price': 16.5, 'fund': 362013.1473392034}
-{'date': Timestamp('2018-10-11 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 12.964, 'fund': 362013.1473392034, 'prev_date': Timestamp('2018-10-05 00:00:00'), 'prev_vix': 14.29, 'prev_WMA_vix': 12.767032258064514}
-{'date': Timestamp('2018-10-17 00:00:00'), 'action': 'sell', 'price': 14.246, 'fund': 397812.3493516115}
-{'date': Timestamp('2018-10-19 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 13.4, 'fund': 397812.3493516115, 'prev_date': Timestamp('2018-10-15 00:00:00'), 'prev_vix': 21.97, 'prev_WMA_vix': 15.037139784946236}
-{'date': Timestamp('2019-03-22 00:00:00'), 'action': 'sell', 'price': 14.307, 'fund': 424738.9016547392}
-{'date': Timestamp('2019-03-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 13.802, 'fund': 424738.9016547392, 'prev_date': Timestamp('2019-03-25 00:00:00'), 'prev_vix': 17.76, 'prev_WMA_vix': 14.617591397849461}
-{'date': Timestamp('2019-04-03 00:00:00'), 'action': 'sell', 'price': 14.847, 'fund': 456897.4404338439}
-{'date': Timestamp('2019-05-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.019, 'fund': 456897.4404338439, 'prev_date': Timestamp('2019-05-02 00:00:00'), 'prev_vix': 14.35, 'prev_WMA_vix': 13.26359139784946}
-{'date': Timestamp('2019-06-20 00:00:00'), 'action': 'sell', 'price': 16.283, 'fund': 495349.95822520007}
-{'date': Timestamp('2019-08-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 14.374, 'fund': 495349.95822520007, 'prev_date': Timestamp('2019-08-01 00:00:00'), 'prev_vix': 15.41, 'prev_WMA_vix': 13.489182795698925}
-{'date': Timestamp('2019-08-08 00:00:00'), 'action': 'sell', 'price': 15.556, 'fund': 536083.4806004739}
-{'date': Timestamp('2019-08-12 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.416, 'fund': 536083.4806004739, 'prev_date': Timestamp('2019-08-06 00:00:00'), 'prev_vix': 22.29, 'prev_WMA_vix': 14.651354838709677}
-{'date': Timestamp('2019-08-21 00:00:00'), 'action': 'sell', 'price': 16.413, 'fund': 570753.6434286182}
-{'date': Timestamp('2019-08-30 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 16.426, 'fund': 570753.6434286182, 'prev_date': Timestamp('2019-08-26 00:00:00'), 'prev_vix': 20.34, 'prev_WMA_vix': 17.686494623655918}
-{'date': Timestamp('2019-09-06 00:00:00'), 'action': 'sell', 'price': 17.431, 'fund': 605674.3430296022}
-{'date': Timestamp('2019-10-01 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 16.902, 'fund': 605674.3430296022, 'prev_date': Timestamp('2019-09-25 00:00:00'), 'prev_vix': 17.05, 'prev_WMA_vix': 16.112}
-{'date': Timestamp('2019-10-28 00:00:00'), 'action': 'sell', 'price': 18.427, 'fund': 660321.9216072937}
-{'date': Timestamp('2019-12-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 21.035, 'fund': 660321.9216072937, 'prev_date': Timestamp('2019-12-03 00:00:00'), 'prev_vix': 14.68, 'prev_WMA_vix': 12.845376344086022}
-{'date': Timestamp('2019-12-16 00:00:00'), 'action': 'sell', 'price': 22.893, 'fund': 718647.4804542798}
-{'date': Timestamp('2019-12-18 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 22.838, 'fund': 718647.4804542798, 'prev_date': Timestamp('2019-12-12 00:00:00'), 'prev_vix': 14.94, 'prev_WMA_vix': 13.744129032258064}
-{'date': Timestamp('2019-12-27 00:00:00'), 'action': 'sell', 'price': 24.71, 'fund': 777554.0433499103}
-{'date': Timestamp('2020-01-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 24.983, 'fund': 777554.0433499103, 'prev_date': Timestamp('2019-12-31 00:00:00'), 'prev_vix': 14.84, 'prev_WMA_vix': 13.414709677419355}
-{'date': Timestamp('2020-01-10 00:00:00'), 'action': 'sell', 'price': 26.805, 'fund': 834260.7425847314}
-{'date': Timestamp('2020-01-14 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 27.404, 'fund': 834260.7425847314, 'prev_date': Timestamp('2020-01-08 00:00:00'), 'prev_vix': 15.16, 'prev_WMA_vix': 13.776494623655914}
-{'date': Timestamp('2020-01-22 00:00:00'), 'action': 'sell', 'price': 29.152, 'fund': 887475.1557374869}
-{'date': Timestamp('2020-01-31 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 28.776, 'fund': 887475.1557374869, 'prev_date': Timestamp('2020-01-27 00:00:00'), 'prev_vix': 17.42, 'prev_WMA_vix': 13.421677419354843}
-{'date': Timestamp('2020-02-05 00:00:00'), 'action': 'sell', 'price': 31.63, 'fund': 975494.828189349}
-{'date': Timestamp('2020-02-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 30.975, 'fund': 975494.828189349, 'prev_date': Timestamp('2020-02-03 00:00:00'), 'prev_vix': 18.64, 'prev_WMA_vix': 14.56389247311828}
-{'date': Timestamp('2020-02-19 00:00:00'), 'action': 'sell', 'price': 32.916, 'fund': 1036622.688125282}
-{'date': Timestamp('2020-02-27 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 21.633, 'fund': 1036622.688125282, 'prev_date': Timestamp('2020-02-21 00:00:00'), 'prev_vix': 17.33, 'prev_WMA_vix': 15.250516129032258}
-{'date': Timestamp('2020-03-03 00:00:00'), 'action': 'sell', 'price': 24.772, 'fund': 1187039.1175629585}
-{'date': Timestamp('2020-03-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 22.3, 'fund': 1187039.1175629585, 'prev_date': Timestamp('2020-02-28 00:00:00'), 'prev_vix': 42.02, 'prev_WMA_vix': 19.43283870967742}
-{'date': Timestamp('2020-06-23 00:00:00'), 'action': 'sell', 'price': 23.635, 'fund': 1258101.7732556288}
-{'date': Timestamp('2020-06-25 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 21.949, 'fund': 1258101.7732556288, 'prev_date': Timestamp('2020-06-19 00:00:00'), 'prev_vix': 32.07, 'prev_WMA_vix': 30.759763440860215}
-{'date': Timestamp('2020-07-01 00:00:00'), 'action': 'sell', 'price': 23.3, 'fund': 1335540.1757189918}
-{'date': Timestamp('2020-07-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 24.604, 'fund': 1335540.1757189918, 'prev_date': Timestamp('2020-06-29 00:00:00'), 'prev_vix': 35.05, 'prev_WMA_vix': 32.00240860215054}
-{'date': Timestamp('2020-07-13 00:00:00'), 'action': 'sell', 'price': 26.264, 'fund': 1425647.3408829297}
-{'date': Timestamp('2020-09-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 28.58, 'fund': 1425647.3408829297, 'prev_date': Timestamp('2020-09-01 00:00:00'), 'prev_vix': 25.86, 'prev_WMA_vix': 23.32769892473118}
-{'date': Timestamp('2020-09-10 00:00:00'), 'action': 'sell', 'price': 31.889, 'fund': 1590709.1691188156}
-{'date': Timestamp('2020-09-14 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 29.204, 'fund': 1590709.1691188156, 'prev_date': Timestamp('2020-09-08 00:00:00'), 'prev_vix': 30.61, 'prev_WMA_vix': 24.75060215053763}
-{'date': Timestamp('2020-09-15 00:00:00'), 'action': 'sell', 'price': 31.055, 'fund': 1691531.065846624}
-{'date': Timestamp('2020-09-17 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 27.0, 'fund': 1691531.065846624, 'prev_date': Timestamp('2020-09-11 00:00:00'), 'prev_vix': 28.63, 'prev_WMA_vix': 25.767204301075267}
-{'date': Timestamp('2020-09-23 00:00:00'), 'action': 'sell', 'price': 28.89, 'fund': 1809938.240455888}
-{'date': Timestamp('2020-09-25 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 26.698, 'fund': 1809938.240455888, 'prev_date': Timestamp('2020-09-21 00:00:00'), 'prev_vix': 28.04, 'prev_WMA_vix': 26.48615053763441}
-{'date': Timestamp('2020-09-28 00:00:00'), 'action': 'sell', 'price': 30.0, 'fund': 2033790.8163037172}
-{'date': Timestamp('2020-09-30 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 29.863, 'fund': 2033790.8163037172, 'prev_date': Timestamp('2020-09-24 00:00:00'), 'prev_vix': 29.54, 'prev_WMA_vix': 27.06806451612903}
-{'date': Timestamp('2020-10-01 00:00:00'), 'action': 'sell', 'price': 31.815, 'fund': 2166729.8938721083}
-{'date': Timestamp('2020-10-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 31.993, 'fund': 2166729.8938721083, 'prev_date': Timestamp('2020-10-02 00:00:00'), 'prev_vix': 28.87, 'prev_WMA_vix': 27.468494623655918}
-{'date': Timestamp('2020-10-12 00:00:00'), 'action': 'sell', 'price': 34.744, 'fund': 2353041.710145736}
-{'date': Timestamp('2020-10-26 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 30.599, 'fund': 2353041.710145736, 'prev_date': Timestamp('2020-10-20 00:00:00'), 'prev_vix': 28.81, 'prev_WMA_vix': 27.349161290322577}
-{'date': Timestamp('2020-11-05 00:00:00'), 'action': 'sell', 'price': 32.903, 'fund': 2530217.6995628993}
-{'date': Timestamp('2020-11-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 35.653, 'fund': 2530217.6995628993, 'prev_date': Timestamp('2020-11-03 00:00:00'), 'prev_vix': 36.44, 'prev_WMA_vix': 31.107849462365593}
-{'date': Timestamp('2020-12-09 00:00:00'), 'action': 'sell', 'price': 37.708, 'fund': 2676056.685695953}
-{'date': Timestamp('2020-12-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 37.267, 'fund': 2676056.685695953, 'prev_date': Timestamp('2020-12-15 00:00:00'), 'prev_vix': 24.0, 'prev_WMA_vix': 22.52415053763441}
-{'date': Timestamp('2020-12-22 00:00:00'), 'action': 'sell', 'price': 39.5, 'fund': 2836403.227654229}
-{'date': Timestamp('2020-12-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 40.724, 'fund': 2836403.227654229, 'prev_date': Timestamp('2020-12-21 00:00:00'), 'prev_vix': 24.25, 'prev_WMA_vix': 22.357870967741935}
-{'date': Timestamp('2021-01-25 00:00:00'), 'action': 'sell', 'price': 44.371, 'fund': 3090414.684565509}
-{'date': Timestamp('2021-02-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 44.027, 'fund': 3090414.684565509, 'prev_date': Timestamp('2021-01-28 00:00:00'), 'prev_vix': 33.25, 'prev_WMA_vix': 23.78341935483871}
-{'date': Timestamp('2021-02-10 00:00:00'), 'action': 'sell', 'price': 46.792, 'fund': 3284500.0549705704}
-{'date': Timestamp('2021-03-04 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 38.46, 'fund': 3284500.0549705704, 'prev_date': Timestamp('2021-02-26 00:00:00'), 'prev_vix': 28.73, 'prev_WMA_vix': 23.855548387096775}
-{'date': Timestamp('2021-03-16 00:00:00'), 'action': 'sell', 'price': 42.32, 'fund': 3614145.6663118703}
-{'date': Timestamp('2021-05-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 47.07, 'fund': 3614145.6663118703, 'prev_date': Timestamp('2021-05-03 00:00:00'), 'prev_vix': 18.65, 'prev_WMA_vix': 17.772924731182794}
-{'date': Timestamp('2021-06-15 00:00:00'), 'action': 'sell', 'price': 50.55, 'fund': 3881348.277715425}
-{'date': Timestamp('2021-06-25 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 53.28, 'fund': 3881348.277715425, 'prev_date': Timestamp('2021-06-21 00:00:00'), 'prev_vix': 21.74, 'prev_WMA_vix': 18.132215053763442}
-{'date': Timestamp('2021-07-02 00:00:00'), 'action': 'sell', 'price': 56.712, 'fund': 4131363.0541628604}
-{'date': Timestamp('2021-07-15 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 61.69, 'fund': 4131363.0541628604, 'prev_date': Timestamp('2021-07-09 00:00:00'), 'prev_vix': 17.88, 'prev_WMA_vix': 16.821526881720427}
-{'date': Timestamp('2021-08-24 00:00:00'), 'action': 'sell', 'price': 67.37, 'fund': 4511751.158355519}
-{'date': Timestamp('2021-08-26 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 66.47, 'fund': 4511751.158355519, 'prev_date': Timestamp('2021-08-20 00:00:00'), 'prev_vix': 22.74, 'prev_WMA_vix': 18.31251612903226}
-{'date': Timestamp('2021-11-01 00:00:00'), 'action': 'sell', 'price': 71.15, 'fund': 4829413.192673314}
-{'date': Timestamp('2021-11-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 78.22, 'fund': 4829413.192673314, 'prev_date': Timestamp('2021-11-10 00:00:00'), 'prev_vix': 17.74, 'prev_WMA_vix': 17.005806451612905}
-{'date': Timestamp('2021-11-19 00:00:00'), 'action': 'sell', 'price': 83.68, 'fund': 5166521.298426271}
-{'date': Timestamp('2021-11-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 79.61, 'fund': 5166521.298426271, 'prev_date': Timestamp('2021-11-22 00:00:00'), 'prev_vix': 18.2, 'prev_WMA_vix': 16.882408602150534}
-{'date': Timestamp('2021-12-08 00:00:00'), 'action': 'sell', 'price': 85.37, 'fund': 5540333.164761347}
-{'date': Timestamp('2021-12-10 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 85.97, 'fund': 5540333.164761347, 'prev_date': Timestamp('2021-12-06 00:00:00'), 'prev_vix': 28.99, 'prev_WMA_vix': 21.34406451612903}
-{'date': Timestamp('2021-12-28 00:00:00'), 'action': 'sell', 'price': 90.98, 'fund': 5863202.411655081}
-{'date': Timestamp('2022-01-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 62.73, 'fund': 5863202.411655081, 'prev_date': Timestamp('2022-01-14 00:00:00'), 'prev_vix': 20.11, 'prev_WMA_vix': 19.241548387096774}
-{'date': Timestamp('2022-02-01 00:00:00'), 'action': 'sell', 'price': 68.6, 'fund': 6411855.339383685}
-{'date': Timestamp('2022-02-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 67.29, 'fund': 6411855.339383685, 'prev_date': Timestamp('2022-01-28 00:00:00'), 'prev_vix': 30.27, 'prev_WMA_vix': 23.256430107526885}
-{'date': Timestamp('2024-01-22 00:00:00'), 'action': 'sell', 'price': 75.08, 'fund': 7154140.271673756}
-{'date': Timestamp('2024-01-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 77.29, 'fund': 7154140.271673756, 'prev_date': Timestamp('2024-01-18 00:00:00'), 'prev_vix': 14.85, 'prev_WMA_vix': 13.367849462365593}
-{'date': Timestamp('2024-02-12 00:00:00'), 'action': 'sell', 'price': 81.8, 'fund': 7571596.250781641}
-{'date': Timestamp('2024-02-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 70.862, 'fund': 7571596.250781641, 'prev_date': Timestamp('2024-02-14 00:00:00'), 'prev_vix': 15.38, 'prev_WMA_vix': 13.691698924731181}
-{'date': Timestamp('2024-02-22 00:00:00'), 'action': 'sell', 'price': 77.2, 'fund': 8248810.795071305}
-{'date': Timestamp('2024-02-26 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 78.96, 'fund': 8248810.795071305, 'prev_date': Timestamp('2024-02-20 00:00:00'), 'prev_vix': 15.09, 'prev_WMA_vix': 13.838752688172042}
-{'date': Timestamp('2024-03-04 00:00:00'), 'action': 'sell', 'price': 83.828, 'fund': 8757362.098901182}
-{'date': Timestamp('2024-03-13 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 83.0, 'fund': 8757362.098901182, 'prev_date': Timestamp('2024-03-07 00:00:00'), 'prev_vix': 14.98, 'prev_WMA_vix': 14.049784946236558}
-{'date': Timestamp('2024-05-23 00:00:00'), 'action': 'sell', 'price': 88.0, 'fund': 9284914.03256993}
-{'date': Timestamp('2024-06-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 82.0, 'fund': 9284914.03256993, 'prev_date': Timestamp('2024-05-30 00:00:00'), 'prev_vix': 14.82, 'prev_WMA_vix': 13.429204301075268}
-{'date': Timestamp('2024-06-12 00:00:00'), 'action': 'sell', 'price': 93.02, 'fund': 10532715.894020181}
-{'date': Timestamp('2024-06-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 98.58, 'fund': 10532715.894020181, 'prev_date': Timestamp('2024-06-24 00:00:00'), 'prev_vix': 13.85, 'prev_WMA_vix': 12.971354838709678}
-{'date': Timestamp('2024-07-05 00:00:00'), 'action': 'sell', 'price': 104.76, 'fund': 11193013.968934411}
-{'date': Timestamp('2024-07-22 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 92.54, 'fund': 11193013.968934411, 'prev_date': Timestamp('2024-07-16 00:00:00'), 'prev_vix': 13.38, 'prev_WMA_vix': 12.791655913978495}
-{'date': Timestamp('2024-11-08 00:00:00'), 'action': 'sell', 'price': 98.7, 'fund': 11938086.003175128}
-{'date': Timestamp('2024-12-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 98.55, 'fund': 11938086.003175128, 'prev_date': Timestamp('2024-12-18 00:00:00'), 'prev_vix': 15.57, 'prev_WMA_vix': 14.49240860215054}
-Final fund value: $11938086.00
-The annualized return is: 54.94%
+{'date': Timestamp('2009-02-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.3563, 'fund': 10000, 'prev_date': Timestamp('2009-02-02 00:00:00'), 'prev_vix': 49.42, 'prev_WMA_vix': 45.51907526881721}
+{'date': Timestamp('2009-02-09 00:00:00'), 'action': 'sell', 'price': 0.3898, 'fund': 10940.218916643278, 'bank': 188.04378332865565}
+{'date': Timestamp('2009-02-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.2838, 'fund': 10940.218916643278, 'prev_date': Timestamp('2009-02-17 00:00:00'), 'prev_vix': 48.14, 'prev_WMA_vix': 45.519268817204306}
+{'date': Timestamp('2009-03-19 00:00:00'), 'action': 'sell', 'price': 0.3283, 'fund': 12655.651410620114, 'bank': 531.1302821240229}
+{'date': Timestamp('2009-06-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.5234, 'fund': 12655.651410620114, 'prev_date': Timestamp('2009-06-18 00:00:00'), 'prev_vix': 31.54, 'prev_WMA_vix': 30.200516129032263}
+{'date': Timestamp('2009-06-26 00:00:00'), 'action': 'sell', 'price': 0.5566, 'fund': 13458.417224209314, 'bank': 691.6834448418629}
+{'date': Timestamp('2009-07-10 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.4891, 'fund': 13458.417224209314, 'prev_date': Timestamp('2009-07-06 00:00:00'), 'prev_vix': 30.32, 'prev_WMA_vix': 28.875075268817206}
+{'date': Timestamp('2009-07-14 00:00:00'), 'action': 'sell', 'price': 0.5321, 'fund': 14641.635258641947, 'bank': 928.3270517283895}
+{'date': Timestamp('2009-08-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.7697, 'fund': 14641.635258641947, 'prev_date': Timestamp('2009-08-18 00:00:00'), 'prev_vix': 27.89, 'prev_WMA_vix': 25.251118279569894}
+{'date': Timestamp('2009-09-11 00:00:00'), 'action': 'sell', 'price': 0.8359, 'fund': 15900.926221513319, 'bank': 1180.1852443026637}
+{'date': Timestamp('2009-10-02 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.7695, 'fund': 15900.926221513319, 'prev_date': Timestamp('2009-09-28 00:00:00'), 'prev_vix': 26.26, 'prev_WMA_vix': 24.90309677419355}
+{'date': Timestamp('2009-10-06 00:00:00'), 'action': 'sell', 'price': 0.8189, 'fund': 16921.72642338825, 'bank': 1384.3452846776497}
+{'date': Timestamp('2009-10-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8764, 'fund': 16921.72642338825, 'prev_date': Timestamp('2009-10-02 00:00:00'), 'prev_vix': 29.34, 'prev_WMA_vix': 25.196107526881722}
+{'date': Timestamp('2009-10-14 00:00:00'), 'action': 'sell', 'price': 0.9626, 'fund': 18586.095224958386, 'bank': 1717.2190449916773}
+{'date': Timestamp('2009-11-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8296, 'fund': 18586.095224958386, 'prev_date': Timestamp('2009-10-28 00:00:00'), 'prev_vix': 24.83, 'prev_WMA_vix': 23.610408602150542}
+{'date': Timestamp('2009-11-05 00:00:00'), 'action': 'sell', 'price': 0.8943, 'fund': 20035.613500096777, 'bank': 2007.1227000193555}
+{'date': Timestamp('2009-11-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.9424, 'fund': 20035.613500096777, 'prev_date': Timestamp('2009-11-03 00:00:00'), 'prev_vix': 30.62, 'prev_WMA_vix': 24.65795698924731}
+{'date': Timestamp('2009-11-11 00:00:00'), 'action': 'sell', 'price': 0.9975, 'fund': 21207.050579739534, 'bank': 2241.410115947907}
+{'date': Timestamp('2009-12-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8744, 'fund': 21207.050579739534, 'prev_date': Timestamp('2009-11-27 00:00:00'), 'prev_vix': 25.75, 'prev_WMA_vix': 23.818301075268817}
+{'date': Timestamp('2009-12-22 00:00:00'), 'action': 'sell', 'price': 0.9502, 'fund': 23045.44769083773, 'bank': 2609.089538167546}
+{'date': Timestamp('2010-01-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 0.8666, 'fund': 23045.44769083773, 'prev_date': Timestamp('2010-01-22 00:00:00'), 'prev_vix': 22.27, 'prev_WMA_vix': 19.46894623655914}
+{'date': Timestamp('2010-03-08 00:00:00'), 'action': 'sell', 'price': 0.9222, 'fund': 24524.015532530062, 'bank': 2904.8031065060127}
+{'date': Timestamp('2010-04-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.1201, 'fund': 24524.015532530062, 'prev_date': Timestamp('2010-04-19 00:00:00'), 'prev_vix': 19.14, 'prev_WMA_vix': 17.046817204301075}
+{'date': Timestamp('2011-01-06 00:00:00'), 'action': 'sell', 'price': 1.2035, 'fund': 26350.015796268122, 'bank': 3270.0031592536247}
+{'date': Timestamp('2011-01-14 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.2688, 'fund': 26350.015796268122, 'prev_date': Timestamp('2011-01-10 00:00:00'), 'prev_vix': 18.35, 'prev_WMA_vix': 17.5089247311828}
+{'date': Timestamp('2011-02-04 00:00:00'), 'action': 'sell', 'price': 1.35, 'fund': 28036.350350695124, 'bank': 3607.270070139025}
+{'date': Timestamp('2011-02-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.3368, 'fund': 28036.350350695124, 'prev_date': Timestamp('2011-02-22 00:00:00'), 'prev_vix': 19.46, 'prev_WMA_vix': 17.04531182795699}
+{'date': Timestamp('2012-02-29 00:00:00'), 'action': 'sell', 'price': 1.4403, 'fund': 30207.028284041127, 'bank': 4041.4056568082256}
+{'date': Timestamp('2012-03-12 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.433, 'fund': 30207.028284041127, 'prev_date': Timestamp('2012-03-06 00:00:00'), 'prev_vix': 20.57, 'prev_WMA_vix': 18.71638709677419}
+{'date': Timestamp('2012-03-14 00:00:00'), 'action': 'sell', 'price': 1.5348, 'fund': 32352.928827876007, 'bank': 4470.585765575202}
+{'date': Timestamp('2012-04-11 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.5673, 'fund': 32352.928827876007, 'prev_date': Timestamp('2012-04-04 00:00:00'), 'prev_vix': 17.07, 'prev_WMA_vix': 16.001526881720434}
+{'date': Timestamp('2013-08-13 00:00:00'), 'action': 'sell', 'price': 1.66, 'fund': 34266.48494498448, 'bank': 4853.296988996895}
+{'date': Timestamp('2013-08-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.5768, 'fund': 34266.48494498448, 'prev_date': Timestamp('2013-08-15 00:00:00'), 'prev_vix': 14.14, 'prev_WMA_vix': 13.143655913978495}
+{'date': Timestamp('2013-09-10 00:00:00'), 'action': 'sell', 'price': 1.6695, 'fund': 36281.01003022044, 'bank': 5256.202006044087}
+{'date': Timestamp('2013-09-13 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.6593, 'fund': 36281.01003022044, 'prev_date': Timestamp('2013-09-09 00:00:00'), 'prev_vix': 15.86, 'prev_WMA_vix': 15.223677419354837}
+{'date': Timestamp('2013-09-20 00:00:00'), 'action': 'sell', 'price': 1.7635, 'fund': 38559.36912450657, 'bank': 5711.873824901314}
+{'date': Timestamp('2013-10-04 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.644, 'fund': 38559.36912450657, 'prev_date': Timestamp('2013-09-30 00:00:00'), 'prev_vix': 17.49, 'prev_WMA_vix': 14.849290322580643}
+{'date': Timestamp('2013-10-18 00:00:00'), 'action': 'sell', 'price': 1.787, 'fund': 41913.377509424114, 'bank': 6382.675501884823}
+{'date': Timestamp('2013-10-22 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 1.8768, 'fund': 41913.377509424114, 'prev_date': Timestamp('2013-10-16 00:00:00'), 'prev_vix': 17.14, 'prev_WMA_vix': 16.385935483870966}
+{'date': Timestamp('2013-11-15 00:00:00'), 'action': 'sell', 'price': 1.9893, 'fund': 44425.76826486434, 'bank': 6885.153652972867}
+{'date': Timestamp('2013-12-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.0923, 'fund': 44425.76826486434, 'prev_date': Timestamp('2013-12-02 00:00:00'), 'prev_vix': 13.91, 'prev_WMA_vix': 13.061913978494623}
+{'date': Timestamp('2013-12-24 00:00:00'), 'action': 'sell', 'price': 2.2247, 'fund': 47237.01508332634, 'bank': 7447.403016665267}
+{'date': Timestamp('2014-01-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.0045, 'fund': 47237.01508332634, 'prev_date': Timestamp('2014-01-23 00:00:00'), 'prev_vix': 13.67, 'prev_WMA_vix': 13.029591397849462}
+{'date': Timestamp('2014-02-10 00:00:00'), 'action': 'sell', 'price': 2.1343, 'fund': 50295.81506228157, 'bank': 8059.163012456313}
+{'date': Timestamp('2014-02-12 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.2523, 'fund': 50295.81506228157, 'prev_date': Timestamp('2014-02-06 00:00:00'), 'prev_vix': 19.09, 'prev_WMA_vix': 15.7125376344086}
+{'date': Timestamp('2014-03-05 00:00:00'), 'action': 'sell', 'price': 2.3958, 'fund': 53500.2946881917, 'bank': 8700.05893763834}
+{'date': Timestamp('2014-03-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.4193, 'fund': 53500.2946881917, 'prev_date': Timestamp('2014-03-03 00:00:00'), 'prev_vix': 16.47, 'prev_WMA_vix': 15.502516129032259}
+{'date': Timestamp('2014-05-27 00:00:00'), 'action': 'sell', 'price': 2.5925, 'fund': 57330.43193450047, 'bank': 9466.086386900093}
+{'date': Timestamp('2014-06-20 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 2.7673, 'fund': 57330.43193450047, 'prev_date': Timestamp('2014-06-16 00:00:00'), 'prev_vix': 12.65, 'prev_WMA_vix': 12.020043010752687}
+{'date': Timestamp('2014-07-07 00:00:00'), 'action': 'sell', 'price': 2.941, 'fund': 60928.9922738286, 'bank': 10185.798454765718}
+{'date': Timestamp('2014-07-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.045, 'fund': 60928.9922738286, 'prev_date': Timestamp('2014-07-10 00:00:00'), 'prev_vix': 13.22, 'prev_WMA_vix': 11.609698924731186}
+{'date': Timestamp('2014-08-25 00:00:00'), 'action': 'sell', 'price': 3.2417, 'fund': 64864.86510806901, 'bank': 10972.973021613801}
+{'date': Timestamp('2014-09-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.1145, 'fund': 64864.86510806901, 'prev_date': Timestamp('2014-09-10 00:00:00'), 'prev_vix': 13.36, 'prev_WMA_vix': 12.704559139784946}
+{'date': Timestamp('2014-09-19 00:00:00'), 'action': 'sell', 'price': 3.3278, 'fund': 69307.20761169757, 'bank': 11861.441522339512}
+{'date': Timestamp('2014-09-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.048, 'fund': 69307.20761169757, 'prev_date': Timestamp('2014-09-23 00:00:00'), 'prev_vix': 14.82, 'prev_WMA_vix': 12.81556989247312}
+{'date': Timestamp('2014-10-31 00:00:00'), 'action': 'sell', 'price': 3.238, 'fund': 73627.53879484144, 'bank': 12725.507758968288}
+{'date': Timestamp('2014-12-15 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.3193, 'fund': 73627.53879484144, 'prev_date': Timestamp('2014-12-09 00:00:00'), 'prev_vix': 16.23, 'prev_WMA_vix': 13.541591397849462}
+{'date': Timestamp('2014-12-19 00:00:00'), 'action': 'sell', 'price': 3.5608, 'fund': 78984.40639311644, 'bank': 13796.881278623288}
+{'date': Timestamp('2014-12-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.7208, 'fund': 78984.40639311644, 'prev_date': Timestamp('2014-12-17 00:00:00'), 'prev_vix': 23.9, 'prev_WMA_vix': 15.891935483870967}
+{'date': Timestamp('2015-03-03 00:00:00'), 'action': 'sell', 'price': 3.9733, 'fund': 84344.4264464012, 'bank': 14868.885289280239}
+{'date': Timestamp('2015-03-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.467, 'fund': 84344.4264464012, 'prev_date': Timestamp('2015-03-10 00:00:00'), 'prev_vix': 16.47, 'prev_WMA_vix': 15.40279569892473}
+{'date': Timestamp('2015-03-19 00:00:00'), 'action': 'sell', 'price': 3.737, 'fund': 90912.92807332023, 'bank': 16182.585614664047}
+{'date': Timestamp('2015-03-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.7583, 'fund': 90912.92807332023, 'prev_date': Timestamp('2015-03-17 00:00:00'), 'prev_vix': 16.31, 'prev_WMA_vix': 15.375225806451612}
+{'date': Timestamp('2015-05-19 00:00:00'), 'action': 'sell', 'price': 3.98, 'fund': 96275.83049033194, 'bank': 17255.166098066387}
+{'date': Timestamp('2015-06-02 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 3.913, 'fund': 96275.83049033194, 'prev_date': Timestamp('2015-05-27 00:00:00'), 'prev_vix': 14.16, 'prev_WMA_vix': 13.357376344086022}
+{'date': Timestamp('2016-07-20 00:00:00'), 'action': 'sell', 'price': 4.193, 'fund': 103164.97757371885, 'bank': 18632.99551474377}
+{'date': Timestamp('2016-08-30 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 4.635, 'fund': 103164.97757371885, 'prev_date': Timestamp('2016-08-24 00:00:00'), 'prev_vix': 12.7, 'prev_WMA_vix': 12.208451612903227}
+{'date': Timestamp('2016-10-11 00:00:00'), 'action': 'sell', 'price': 4.905, 'fund': 109174.587917819, 'bank': 19834.917583563798}
+{'date': Timestamp('2016-10-18 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 4.811, 'fund': 109174.587917819, 'prev_date': Timestamp('2016-10-12 00:00:00'), 'prev_vix': 15.53, 'prev_WMA_vix': 14.104752688172043}
+{'date': Timestamp('2016-12-14 00:00:00'), 'action': 'sell', 'price': 5.181, 'fund': 117570.88754982753, 'bank': 21514.177509965506}
+{'date': Timestamp('2017-01-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 5.195, 'fund': 117570.88754982753, 'prev_date': Timestamp('2016-12-29 00:00:00'), 'prev_vix': 13.15, 'prev_WMA_vix': 12.399161290322581}
+{'date': Timestamp('2017-01-25 00:00:00'), 'action': 'sell', 'price': 5.687, 'fund': 128705.60875762641, 'bank': 23741.121751525283}
+{'date': Timestamp('2017-02-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 5.71, 'fund': 128705.60875762641, 'prev_date': Timestamp('2017-01-31 00:00:00'), 'prev_vix': 12.29, 'prev_WMA_vix': 11.797698924731181}
+{'date': Timestamp('2017-02-15 00:00:00'), 'action': 'sell', 'price': 6.085, 'fund': 137158.25381613954, 'bank': 25431.650763227906}
+{'date': Timestamp('2017-02-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 6.405, 'fund': 137158.25381613954, 'prev_date': Timestamp('2017-02-16 00:00:00'), 'prev_vix': 12.02, 'prev_WMA_vix': 11.495354838709678}
+{'date': Timestamp('2017-03-21 00:00:00'), 'action': 'sell', 'price': 6.803, 'fund': 145681.12423281767, 'bank': 27136.224846563535}
+{'date': Timestamp('2017-03-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 6.522, 'fund': 145681.12423281767, 'prev_date': Timestamp('2017-03-22 00:00:00'), 'prev_vix': 12.95, 'prev_WMA_vix': 11.773978494623657}
+{'date': Timestamp('2017-04-25 00:00:00'), 'action': 'sell', 'price': 6.944, 'fund': 155107.2871316599, 'bank': 29021.457426331977}
+{'date': Timestamp('2017-05-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 7.648, 'fund': 155107.2871316599, 'prev_date': Timestamp('2017-05-17 00:00:00'), 'prev_vix': 11.89, 'prev_WMA_vix': 11.253763440860215}
+{'date': Timestamp('2017-06-05 00:00:00'), 'action': 'sell', 'price': 8.166, 'fund': 165612.7231586212, 'bank': 31122.54463172424}
+{'date': Timestamp('2017-06-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 7.46, 'fund': 165612.7231586212, 'prev_date': Timestamp('2017-06-12 00:00:00'), 'prev_vix': 11.19, 'prev_WMA_vix': 10.693892473118279}
+{'date': Timestamp('2017-06-26 00:00:00'), 'action': 'sell', 'price': 7.918, 'fund': 175780.36755629527, 'bank': 33156.073511259056}
+{'date': Timestamp('2017-07-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 7.075, 'fund': 175780.36755629527, 'prev_date': Timestamp('2017-06-28 00:00:00'), 'prev_vix': 11.17, 'prev_WMA_vix': 10.566688172043012}
+{'date': Timestamp('2017-07-12 00:00:00'), 'action': 'sell', 'price': 7.68, 'fund': 190811.76294450142, 'bank': 36162.352588900285}
+{'date': Timestamp('2017-08-15 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 8.529, 'fund': 190811.76294450142, 'prev_date': Timestamp('2017-08-09 00:00:00'), 'prev_vix': 11.49, 'prev_WMA_vix': 10.241612903225805}
+{'date': Timestamp('2017-10-05 00:00:00'), 'action': 'sell', 'price': 9.119, 'fund': 204011.31038702172, 'bank': 38802.262077404346}
+{'date': Timestamp('2017-10-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 9.758, 'fund': 204011.31038702172, 'prev_date': Timestamp('2017-10-18 00:00:00'), 'prev_vix': 10.34, 'prev_WMA_vix': 9.915397849462366}
+{'date': Timestamp('2017-10-30 00:00:00'), 'action': 'sell', 'price': 10.571, 'fund': 221008.76840553462, 'bank': 42201.75368110693}
+{'date': Timestamp('2017-11-01 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 10.904, 'fund': 221008.76840553462, 'prev_date': Timestamp('2017-10-26 00:00:00'), 'prev_vix': 11.17, 'prev_WMA_vix': 10.141075268817204}
+{'date': Timestamp('2017-11-28 00:00:00'), 'action': 'sell', 'price': 11.577, 'fund': 234649.53336673463, 'bank': 44929.90667334693}
+{'date': Timestamp('2017-12-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 10.653, 'fund': 234649.53336673463, 'prev_date': Timestamp('2017-12-01 00:00:00'), 'prev_vix': 11.19, 'prev_WMA_vix': 10.634709677419355}
+{'date': Timestamp('2017-12-13 00:00:00'), 'action': 'sell', 'price': 11.337, 'fund': 249715.73826890736, 'bank': 47943.147653781474}
+{'date': Timestamp('2018-01-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 12.524, 'fund': 249715.73826890736, 'prev_date': Timestamp('2018-01-02 00:00:00'), 'prev_vix': 10.95, 'prev_WMA_vix': 10.10883870967742}
+{'date': Timestamp('2018-01-19 00:00:00'), 'action': 'sell', 'price': 13.349, 'fund': 266165.39365631144, 'bank': 51233.07873126229}
+{'date': Timestamp('2018-01-23 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 13.846, 'fund': 266165.39365631144, 'prev_date': Timestamp('2018-01-17 00:00:00'), 'prev_vix': 11.35, 'prev_WMA_vix': 9.926301075268816}
+{'date': Timestamp('2018-03-13 00:00:00'), 'action': 'sell', 'price': 14.799, 'fund': 284485.16977609077, 'bank': 54897.03395521816}
+{'date': Timestamp('2018-03-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 11.066, 'fund': 284485.16977609077, 'prev_date': Timestamp('2018-03-23 00:00:00'), 'prev_vix': 24.02, 'prev_WMA_vix': 18.463268817204302}
+{'date': Timestamp('2018-04-05 00:00:00'), 'action': 'sell', 'price': 11.708, 'fund': 300989.7314059706, 'bank': 58197.94628119413}
+{'date': Timestamp('2018-04-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 10.965, 'fund': 300989.7314059706, 'prev_date': Timestamp('2018-04-03 00:00:00'), 'prev_vix': 23.03, 'prev_WMA_vix': 19.629827956989246}
+{'date': Timestamp('2018-04-12 00:00:00'), 'action': 'sell', 'price': 11.75, 'fund': 322538.0158705111, 'bank': 62507.60317410224}
+{'date': Timestamp('2018-06-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 14.73, 'fund': 322538.0158705111, 'prev_date': Timestamp('2018-05-30 00:00:00'), 'prev_vix': 16.6, 'prev_WMA_vix': 14.23989247311828}
+{'date': Timestamp('2018-07-24 00:00:00'), 'action': 'sell', 'price': 15.814, 'fund': 346274.01106424053, 'bank': 67254.80221284812}
+{'date': Timestamp('2018-08-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.089, 'fund': 346274.01106424053, 'prev_date': Timestamp('2018-07-31 00:00:00'), 'prev_vix': 13.98, 'prev_WMA_vix': 13.434365591397848}
+{'date': Timestamp('2018-08-27 00:00:00'), 'action': 'sell', 'price': 16.3, 'fund': 374064.97318226, 'bank': 72812.99463645201}
+{'date': Timestamp('2018-09-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.42, 'fund': 374064.97318226, 'prev_date': Timestamp('2018-08-31 00:00:00'), 'prev_vix': 13.54, 'prev_WMA_vix': 12.65298924731183}
+{'date': Timestamp('2018-09-14 00:00:00'), 'action': 'sell', 'price': 16.5, 'fund': 400264.0763623405, 'bank': 78052.81527246811}
+{'date': Timestamp('2018-10-11 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 12.964, 'fund': 400264.0763623405, 'prev_date': Timestamp('2018-10-05 00:00:00'), 'prev_vix': 14.29, 'prev_WMA_vix': 12.767032258064514}
+{'date': Timestamp('2018-10-17 00:00:00'), 'action': 'sell', 'price': 14.246, 'fund': 439845.8833583695, 'bank': 85969.17667167392}
+{'date': Timestamp('2018-10-19 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 13.4, 'fund': 439845.8833583695, 'prev_date': Timestamp('2018-10-15 00:00:00'), 'prev_vix': 21.97, 'prev_WMA_vix': 15.037139784946236}
+{'date': Timestamp('2019-03-22 00:00:00'), 'action': 'sell', 'price': 14.307, 'fund': 469617.54128419346, 'bank': 91923.50825683872}
+{'date': Timestamp('2019-03-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 13.802, 'fund': 469617.54128419346, 'prev_date': Timestamp('2019-03-25 00:00:00'), 'prev_vix': 17.76, 'prev_WMA_vix': 14.617591397849461}
+{'date': Timestamp('2019-04-03 00:00:00'), 'action': 'sell', 'price': 14.847, 'fund': 505174.00633577886, 'bank': 99034.8012671558}
+{'date': Timestamp('2019-05-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.019, 'fund': 505174.00633577886, 'prev_date': Timestamp('2019-05-02 00:00:00'), 'prev_vix': 14.35, 'prev_WMA_vix': 13.26359139784946}
+{'date': Timestamp('2019-06-20 00:00:00'), 'action': 'sell', 'price': 16.283, 'fund': 547689.4829992334, 'bank': 107537.8965998467}
+{'date': Timestamp('2019-08-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 14.374, 'fund': 547689.4829992334, 'prev_date': Timestamp('2019-08-01 00:00:00'), 'prev_vix': 15.41, 'prev_WMA_vix': 13.489182795698925}
+{'date': Timestamp('2019-08-08 00:00:00'), 'action': 'sell', 'price': 15.556, 'fund': 592726.9790967075, 'bank': 116545.39581934153}
+{'date': Timestamp('2019-08-12 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 15.416, 'fund': 592726.9790967075, 'prev_date': Timestamp('2019-08-06 00:00:00'), 'prev_vix': 22.29, 'prev_WMA_vix': 14.651354838709677}
+{'date': Timestamp('2019-08-21 00:00:00'), 'action': 'sell', 'price': 16.413, 'fund': 631060.4506950092, 'bank': 124212.09013900187}
+{'date': Timestamp('2019-08-30 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 16.426, 'fund': 631060.4506950092, 'prev_date': Timestamp('2019-08-26 00:00:00'), 'prev_vix': 20.34, 'prev_WMA_vix': 17.686494623655918}
+{'date': Timestamp('2019-09-06 00:00:00'), 'action': 'sell', 'price': 17.431, 'fund': 669670.9312105629, 'bank': 131934.18624211263}
+{'date': Timestamp('2019-10-01 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 16.902, 'fund': 669670.9312105629, 'prev_date': Timestamp('2019-09-25 00:00:00'), 'prev_vix': 17.05, 'prev_WMA_vix': 16.112}
+{'date': Timestamp('2019-10-28 00:00:00'), 'action': 'sell', 'price': 18.427, 'fund': 730092.666513847, 'bank': 144018.53330276944}
+{'date': Timestamp('2019-12-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 21.035, 'fund': 730092.666513847, 'prev_date': Timestamp('2019-12-03 00:00:00'), 'prev_vix': 14.68, 'prev_WMA_vix': 12.845376344086022}
+{'date': Timestamp('2019-12-16 00:00:00'), 'action': 'sell', 'price': 22.893, 'fund': 794581.0037794865, 'bank': 156916.20075589736}
+{'date': Timestamp('2019-12-18 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 22.838, 'fund': 794581.0037794865, 'prev_date': Timestamp('2019-12-12 00:00:00'), 'prev_vix': 14.94, 'prev_WMA_vix': 13.744129032258064}
+{'date': Timestamp('2019-12-27 00:00:00'), 'action': 'sell', 'price': 24.71, 'fund': 859711.7349764038, 'bank': 169942.3469952808}
+{'date': Timestamp('2020-01-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 24.983, 'fund': 859711.7349764038, 'prev_date': Timestamp('2019-12-31 00:00:00'), 'prev_vix': 14.84, 'prev_WMA_vix': 13.414709677419355}
+{'date': Timestamp('2020-01-10 00:00:00'), 'action': 'sell', 'price': 26.805, 'fund': 922410.161151283, 'bank': 182482.03223025662}
+{'date': Timestamp('2020-01-14 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 27.404, 'fund': 922410.161151283, 'prev_date': Timestamp('2020-01-08 00:00:00'), 'prev_vix': 15.16, 'prev_WMA_vix': 13.776494623655914}
+{'date': Timestamp('2020-01-22 00:00:00'), 'action': 'sell', 'price': 29.152, 'fund': 981247.3003168225, 'bank': 194249.46006336453}
+{'date': Timestamp('2020-01-31 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 28.776, 'fund': 981247.3003168225, 'prev_date': Timestamp('2020-01-27 00:00:00'), 'prev_vix': 17.42, 'prev_WMA_vix': 13.421677419354843}
+{'date': Timestamp('2020-02-05 00:00:00'), 'action': 'sell', 'price': 31.63, 'fund': 1078567.2820760736, 'bank': 213713.45641521475}
+{'date': Timestamp('2020-02-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 30.975, 'fund': 1078567.2820760736, 'prev_date': Timestamp('2020-02-03 00:00:00'), 'prev_vix': 18.64, 'prev_WMA_vix': 14.56389247311828}
+{'date': Timestamp('2020-02-19 00:00:00'), 'action': 'sell', 'price': 32.916, 'fund': 1146154.0163620994, 'bank': 227230.80327241993}
+{'date': Timestamp('2020-02-27 00:00:00'), 'action': 'buy (immediate low TECL)', 'price': 21.633, 'fund': 1146154.0163620994}
+{'date': Timestamp('2020-03-03 00:00:00'), 'action': 'sell', 'price': 24.772, 'fund': 1312463.7032922816, 'bank': 260492.74065845637}
+{'date': Timestamp('2020-03-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 22.3, 'fund': 1312463.7032922816, 'prev_date': Timestamp('2020-02-28 00:00:00'), 'prev_vix': 42.02, 'prev_WMA_vix': 19.43283870967742}
+{'date': Timestamp('2020-06-23 00:00:00'), 'action': 'sell', 'price': 23.635, 'fund': 1391034.960866057, 'bank': 276206.9921732115}
+{'date': Timestamp('2020-06-25 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 21.949, 'fund': 1391034.960866057, 'prev_date': Timestamp('2020-06-19 00:00:00'), 'prev_vix': 32.07, 'prev_WMA_vix': 30.759763440860215}
+{'date': Timestamp('2020-07-01 00:00:00'), 'action': 'sell', 'price': 23.3, 'fund': 1476655.6375315108, 'bank': 293331.1275063022}
+{'date': Timestamp('2020-07-06 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 24.604, 'fund': 1476655.6375315108, 'prev_date': Timestamp('2020-06-29 00:00:00'), 'prev_vix': 35.05, 'prev_WMA_vix': 32.00240860215054}
+{'date': Timestamp('2020-07-13 00:00:00'), 'action': 'sell', 'price': 26.264, 'fund': 1576283.6800572104, 'bank': 313256.73601144215}
+{'date': Timestamp('2020-09-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 28.58, 'fund': 1576283.6800572104, 'prev_date': Timestamp('2020-09-01 00:00:00'), 'prev_vix': 25.86, 'prev_WMA_vix': 23.32769892473118}
+{'date': Timestamp('2020-09-10 00:00:00'), 'action': 'sell', 'price': 31.889, 'fund': 1758786.2236999436, 'bank': 349757.2447399888}
+{'date': Timestamp('2020-09-14 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 29.204, 'fund': 1758786.2236999436, 'prev_date': Timestamp('2020-09-08 00:00:00'), 'prev_vix': 30.61, 'prev_WMA_vix': 24.75060215053763}
+{'date': Timestamp('2020-09-15 00:00:00'), 'action': 'sell', 'price': 31.055, 'fund': 1870261.1346733922, 'bank': 372052.2269346785}
+{'date': Timestamp('2020-09-17 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 27.0, 'fund': 1870261.1346733922, 'prev_date': Timestamp('2020-09-11 00:00:00'), 'prev_vix': 28.63, 'prev_WMA_vix': 25.767204301075267}
+{'date': Timestamp('2020-09-23 00:00:00'), 'action': 'sell', 'price': 28.89, 'fund': 2001179.4141005296, 'bank': 398235.882820106}
+{'date': Timestamp('2020-09-25 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 26.698, 'fund': 2001179.4141005296, 'prev_date': Timestamp('2020-09-21 00:00:00'), 'prev_vix': 28.04, 'prev_WMA_vix': 26.48615053763441}
+{'date': Timestamp('2020-09-28 00:00:00'), 'action': 'sell', 'price': 30.0, 'fund': 2248684.636415308, 'bank': 447736.92728306167}
+{'date': Timestamp('2020-09-30 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 29.863, 'fund': 2248684.636415308, 'prev_date': Timestamp('2020-09-24 00:00:00'), 'prev_vix': 29.54, 'prev_WMA_vix': 27.06806451612903}
+{'date': Timestamp('2020-10-01 00:00:00'), 'action': 'sell', 'price': 31.815, 'fund': 2395670.284551218, 'bank': 477134.0569102437}
+{'date': Timestamp('2020-10-08 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 31.993, 'fund': 2395670.284551218, 'prev_date': Timestamp('2020-10-02 00:00:00'), 'prev_vix': 28.87, 'prev_WMA_vix': 27.468494623655918}
+{'date': Timestamp('2020-10-12 00:00:00'), 'action': 'sell', 'price': 34.744, 'fund': 2601668.1263541253, 'bank': 518333.6252708251}
+{'date': Timestamp('2020-10-26 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 30.599, 'fund': 2601668.1263541253, 'prev_date': Timestamp('2020-10-20 00:00:00'), 'prev_vix': 28.81, 'prev_WMA_vix': 27.349161290322577}
+{'date': Timestamp('2020-11-05 00:00:00'), 'action': 'sell', 'price': 32.903, 'fund': 2797564.8341916334, 'bank': 557512.9668383268}
+{'date': Timestamp('2020-11-09 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 35.653, 'fund': 2797564.8341916334, 'prev_date': Timestamp('2020-11-03 00:00:00'), 'prev_vix': 36.44, 'prev_WMA_vix': 31.107849462365593}
+{'date': Timestamp('2020-12-17 00:00:00'), 'action': 'sell', 'price': 39.0, 'fund': 3060192.0885612345, 'bank': 610038.417712247}
+{'date': Timestamp('2020-12-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 37.267, 'fund': 3060192.0885612345, 'prev_date': Timestamp('2020-12-15 00:00:00'), 'prev_vix': 24.0, 'prev_WMA_vix': 22.52415053763441}
+{'date': Timestamp('2020-12-22 00:00:00'), 'action': 'sell', 'price': 39.5, 'fund': 3243555.6255713836, 'bank': 646711.1251142768}
+{'date': Timestamp('2020-12-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 40.724, 'fund': 3243555.6255713836, 'prev_date': Timestamp('2020-12-21 00:00:00'), 'prev_vix': 24.25, 'prev_WMA_vix': 22.357870967741935}
+{'date': Timestamp('2021-01-25 00:00:00'), 'action': 'sell', 'price': 44.371, 'fund': 3534029.2373594902, 'bank': 704805.8474718981}
+{'date': Timestamp('2021-02-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 44.027, 'fund': 3534029.2373594902, 'prev_date': Timestamp('2021-01-28 00:00:00'), 'prev_vix': 33.25, 'prev_WMA_vix': 23.78341935483871}
+{'date': Timestamp('2021-02-10 00:00:00'), 'action': 'sell', 'price': 46.792, 'fund': 3755974.6536108586, 'bank': 749194.9307221718}
+{'date': Timestamp('2021-03-04 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 38.46, 'fund': 3755974.6536108586, 'prev_date': Timestamp('2021-02-26 00:00:00'), 'prev_vix': 28.73, 'prev_WMA_vix': 23.855548387096775}
+{'date': Timestamp('2021-03-16 00:00:00'), 'action': 'sell', 'price': 42.32, 'fund': 4132939.3484350373, 'bank': 824587.8696870075}
+{'date': Timestamp('2021-05-07 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 47.07, 'fund': 4132939.3484350373, 'prev_date': Timestamp('2021-05-03 00:00:00'), 'prev_vix': 18.65, 'prev_WMA_vix': 17.772924731182794}
+{'date': Timestamp('2021-06-15 00:00:00'), 'action': 'sell', 'price': 50.55, 'fund': 4438497.643156812, 'bank': 885699.5286313624}
+{'date': Timestamp('2021-06-25 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 53.28, 'fund': 4438497.643156812, 'prev_date': Timestamp('2021-06-21 00:00:00'), 'prev_vix': 21.74, 'prev_WMA_vix': 18.132215053763442}
+{'date': Timestamp('2021-07-02 00:00:00'), 'action': 'sell', 'price': 56.712, 'fund': 4724400.869720517, 'bank': 942880.1739441034}
+{'date': Timestamp('2021-07-14 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 61.93, 'fund': 4724400.869720517, 'prev_date': Timestamp('2021-07-08 00:00:00'), 'prev_vix': 17.74, 'prev_WMA_vix': 16.76752688172043}
+{'date': Timestamp('2021-08-24 00:00:00'), 'action': 'sell', 'price': 67.37, 'fund': 5139397.490603443, 'bank': 1025879.4981206887}
+{'date': Timestamp('2021-08-26 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 66.47, 'fund': 5139397.490603443, 'prev_date': Timestamp('2021-08-20 00:00:00'), 'prev_vix': 22.74, 'prev_WMA_vix': 18.31251612903226}
+{'date': Timestamp('2021-11-01 00:00:00'), 'action': 'sell', 'price': 71.15, 'fund': 5501250.661297352, 'bank': 1098250.1322594704}
+{'date': Timestamp('2021-11-16 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 78.22, 'fund': 5501250.661297352, 'prev_date': Timestamp('2021-11-10 00:00:00'), 'prev_vix': 17.74, 'prev_WMA_vix': 17.005806451612905}
+{'date': Timestamp('2021-11-19 00:00:00'), 'action': 'sell', 'price': 83.68, 'fund': 5885255.118094636, 'bank': 1175051.0236189272}
+{'date': Timestamp('2021-11-29 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 79.61, 'fund': 5885255.118094636, 'prev_date': Timestamp('2021-11-22 00:00:00'), 'prev_vix': 18.2, 'prev_WMA_vix': 16.882408602150534}
+{'date': Timestamp('2021-12-08 00:00:00'), 'action': 'sell', 'price': 85.37, 'fund': 6311069.330884803, 'bank': 1260213.8661769605}
+{'date': Timestamp('2021-12-10 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 85.97, 'fund': 6311069.330884803, 'prev_date': Timestamp('2021-12-06 00:00:00'), 'prev_vix': 28.99, 'prev_WMA_vix': 21.34406451612903}
+{'date': Timestamp('2021-12-28 00:00:00'), 'action': 'sell', 'price': 90.98, 'fund': 6678854.108687907, 'bank': 1333770.8217375814}
+{'date': Timestamp('2022-01-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 62.73, 'fund': 6678854.108687907, 'prev_date': Timestamp('2022-01-14 00:00:00'), 'prev_vix': 20.11, 'prev_WMA_vix': 19.241548387096774}
+{'date': Timestamp('2022-02-01 00:00:00'), 'action': 'sell', 'price': 68.6, 'fund': 7303832.167320108, 'bank': 1458766.4334640214}
+{'date': Timestamp('2022-02-03 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 67.29, 'fund': 7303832.167320108, 'prev_date': Timestamp('2022-01-28 00:00:00'), 'prev_vix': 30.27, 'prev_WMA_vix': 23.256430107526885}
+{'date': Timestamp('2024-01-22 00:00:00'), 'action': 'sell', 'price': 75.08, 'fund': 8149379.092322688, 'bank': 1627875.8184645374}
+{'date': Timestamp('2024-01-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 77.29, 'fund': 8149379.092322688, 'prev_date': Timestamp('2024-01-18 00:00:00'), 'prev_vix': 14.85, 'prev_WMA_vix': 13.367849462365593}
+{'date': Timestamp('2024-02-12 00:00:00'), 'action': 'sell', 'price': 81.8, 'fund': 8624908.91126919, 'bank': 1722981.782253838}
+{'date': Timestamp('2024-02-21 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 70.862, 'fund': 8624908.91126919, 'prev_date': Timestamp('2024-02-14 00:00:00'), 'prev_vix': 15.38, 'prev_WMA_vix': 13.691698924731181}
+{'date': Timestamp('2024-02-22 00:00:00'), 'action': 'sell', 'price': 77.2, 'fund': 9396333.266771777, 'bank': 1877266.6533543554}
+{'date': Timestamp('2024-02-26 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 78.96, 'fund': 9396333.266771777, 'prev_date': Timestamp('2024-02-20 00:00:00'), 'prev_vix': 15.09, 'prev_WMA_vix': 13.838752688172042}
+{'date': Timestamp('2024-03-04 00:00:00'), 'action': 'sell', 'price': 83.828, 'fund': 9975631.016805274, 'bank': 1993126.2033610549}
+{'date': Timestamp('2024-03-13 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 83.0, 'fund': 9975631.016805274, 'prev_date': Timestamp('2024-03-07 00:00:00'), 'prev_vix': 14.98, 'prev_WMA_vix': 14.049784946236558}
+{'date': Timestamp('2024-05-23 00:00:00'), 'action': 'sell', 'price': 88.0, 'fund': 10576572.644323666, 'bank': 2113314.528864733}
+{'date': Timestamp('2024-06-05 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 82.0, 'fund': 10576572.644323666, 'prev_date': Timestamp('2024-05-30 00:00:00'), 'prev_vix': 14.82, 'prev_WMA_vix': 13.429204301075268}
+{'date': Timestamp('2024-06-12 00:00:00'), 'action': 'sell', 'price': 93.02, 'fund': 11997960.821646186, 'bank': 2397592.164329237}
+{'date': Timestamp('2024-06-28 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 98.58, 'fund': 11997960.821646186, 'prev_date': Timestamp('2024-06-24 00:00:00'), 'prev_vix': 13.85, 'prev_WMA_vix': 12.971354838709678}
+{'date': Timestamp('2024-07-05 00:00:00'), 'action': 'sell', 'price': 104.76, 'fund': 12750115.395370811, 'bank': 2548023.079074162}
+{'date': Timestamp('2024-07-22 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 92.54, 'fund': 12750115.395370811, 'prev_date': Timestamp('2024-07-16 00:00:00'), 'prev_vix': 13.38, 'prev_WMA_vix': 12.791655913978495}
+{'date': Timestamp('2024-11-08 00:00:00'), 'action': 'sell', 'price': 98.7, 'fund': 13598837.146348596, 'bank': 2717767.429269719}
+{'date': Timestamp('2024-12-24 00:00:00'), 'action': 'buy (with VIX condition)', 'price': 98.55, 'fund': 13598837.146348596, 'prev_date': Timestamp('2024-12-18 00:00:00'), 'prev_vix': 15.57, 'prev_WMA_vix': 14.49240860215054}
+Final fund value: $13598837.15
+Total amount in bank: $2717767.43
