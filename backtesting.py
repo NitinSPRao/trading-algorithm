@@ -89,6 +89,7 @@ def backtest_trading(merged_df, initial_fund=10000):
     Returns a list of trade records and the final fund value.
     """
     fund = initial_fund
+    bank = 0  # Initialize bank to hold 20% of profits
     in_position = False
     purchase_price = None
     trades = []
@@ -109,12 +110,15 @@ def backtest_trading(merged_df, initial_fund=10000):
         if in_position:
             if tecl_price >= purchase_price * 1.058:
                 sell_price = tecl_price
-                fund = fund * (sell_price / purchase_price)
+                profit = fund * (sell_price / purchase_price) - fund
+                bank += profit * 0.2  # Take out 20% of profits to the bank
+                fund = fund * (sell_price / purchase_price)  # Update fund with remaining profit
                 trades.append({
                     'date': current_date,
                     'action': 'sell',
                     'price': sell_price,
-                    'fund': fund
+                    'fund': fund,
+                    'bank': bank
                 })
                 in_position = False
                 purchase_price = None
@@ -159,10 +163,7 @@ def backtest_trading(merged_df, initial_fund=10000):
                     })
                     continue
 
-    return trades, fund
-
-
-  
+    return trades, fund, bank  # Return bank along with trades and fund
 
 
 if __name__ == '__main__':
@@ -179,13 +180,13 @@ if __name__ == '__main__':
     
     merged_df = calculate_indicators(merged_df)
     
-    trades, final_fund = backtest_trading(merged_df)
+    trades, final_fund, final_bank = backtest_trading(merged_df)
     
     for trade in trades:
         print(trade)
     print(f"Final fund value: ${final_fund:.2f}")
+    print(f"Total amount in bank: ${final_bank:.2f}")
     
     starting_fund = 10000
     start_date = '2008-12-17'
     end_date = '2025-02-21'
-    
