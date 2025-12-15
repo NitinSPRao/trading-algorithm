@@ -88,6 +88,19 @@ python tests/test_buy_sell.py
 ./scripts/run_trader.sh
 ```
 
+### Automated Daily Trading
+
+Run the algorithm automatically at market open (9:30 AM ET):
+
+**Option 1: Local Machine (cron/launchd)**
+- See [DAILY_TRADING_SETUP.md](DAILY_TRADING_SETUP.md)
+- Requires your computer to be on
+
+**Option 2: GitHub Actions (Cloud - Recommended)**
+- See [GITHUB_ACTIONS_SETUP.md](GITHUB_ACTIONS_SETUP.md)
+- Runs in the cloud automatically
+- Free and reliable
+
 ## Trading Strategy
 
 The system implements the following trading logic:
