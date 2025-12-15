@@ -79,10 +79,15 @@ jobs:
         echo "Trading algorithm exit code: $EXIT_CODE"
         exit $EXIT_CODE
 
-    - name: Display log summary
+    - name: Display daily report
       if: always()
       run: |
-        if [ -f logs/daily_trading.log ]; then
+        if [ -f logs/daily_report.txt ]; then
+          echo "=========================================="
+          echo "DAILY TRADING REPORT"
+          echo "=========================================="
+          cat logs/daily_report.txt
+        elif [ -f logs/daily_trading.log ]; then
           echo "=========================================="
           echo "Last 50 lines of trading log:"
           echo "=========================================="
@@ -97,7 +102,7 @@ jobs:
         path: logs/
         retention-days: 90
 
-    - name: Create summary
+    - name: Create summary and send email
       if: always()
       run: |
         echo "## Trading Algorithm Execution Summary" >> $GITHUB_STEP_SUMMARY
@@ -107,12 +112,35 @@ jobs:
         echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
 
-        if [ -f logs/daily_trading.log ]; then
+        if [ -f logs/daily_report.txt ]; then
+          echo "### Daily Trading Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat logs/daily_report.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+        elif [ -f logs/daily_trading.log ]; then
           echo "### Recent Log Entries" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           tail -20 logs/daily_trading.log >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         fi
+
+    - name: Send email report
+      if: always() && steps.*.outcome != 'skipped'
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        secure: true
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "Trading Report - ${{ job.status }} - $(TZ='America/New_York' date '+%Y-%m-%d')"
+        to: ${{ secrets.EMAIL_TO }}
+        from: Trading Algorithm
+        body: file://logs/daily_report.txt
+        attachments: logs/daily_report.json,logs/daily_trading.log
+        ignore_cert: false
+        convert_markdown: false
+        priority: normal
 
     - name: Notify on failure
       if: failure()
