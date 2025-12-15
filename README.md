@@ -32,7 +32,7 @@ This system implements a backtesting framework that:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/trading-algorithm.git
+git clone https://github.com/NitinSPRao/trading-algorithm.git
 cd trading-algorithm
 ```
 
