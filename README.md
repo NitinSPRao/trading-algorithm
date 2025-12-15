@@ -41,15 +41,51 @@ cd trading-algorithm
 pip install pandas numpy
 ```
 
+## Project Structure
+
+```
+trading-algorithm/
+├── trading_algorithm/    # Main package
+│   ├── backtesting.py   # Backtesting engine with live data support
+│   └── trader.py        # Live trading implementation
+├── tests/               # Test scripts
+│   ├── test_alpaca_credentials.py
+│   ├── test_buy_sell.py
+│   └── ...
+├── scripts/             # Utility scripts
+│   ├── run_trader.sh
+│   ├── rotate_logs.sh
+│   └── setup_monitoring.sh
+├── logs/               # Log files (auto-generated)
+├── data/               # CSV data files
+└── docs/               # Documentation
+```
+
 ## Usage
 
-1. Prepare your data files:
-   - `tecl_history5.csv`: Historical data for TECL
-   - `vix_history.csv`: Historical data for VIX
+### Running Backtests
 
-2. Run the backtesting script:
+With live data from APIs:
 ```bash
-python backtesting.py
+python -m trading_algorithm.backtesting --live-data
+```
+
+With local CSV files:
+```bash
+python -m trading_algorithm.backtesting
+```
+
+### Running Tests
+
+```bash
+python tests/test_alpaca_credentials.py
+python tests/test_buy_sell.py
+```
+
+### Running Scripts
+
+```bash
+./scripts/run_trader.sh
 ```
 
 ## Trading Strategy
