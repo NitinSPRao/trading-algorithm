@@ -35,7 +35,8 @@ def calculate_entry_price_targets(sma, wma, vix):
 
     # Is VIX condition currently met?
     vix_condition_met = vix > (1.04 * wma)
-    targets['vix_condition_active'] = vix_condition_met
+    # Convert to native Python bool for JSON serialization
+    targets['vix_condition_active'] = bool(vix_condition_met)
     targets['vix_threshold'] = round(1.04 * wma, 2)
 
     return targets
@@ -49,9 +50,9 @@ def generate_daily_report(trader, entered_today, exited_today):
     report = {
         'date': now_et.strftime('%Y-%m-%d'),
         'time': now_et.strftime('%I:%M %p ET'),
-        'entered_position_today': entered_today,
-        'exited_position_today': exited_today,
-        'currently_in_position': trader.in_position,
+        'entered_position_today': bool(entered_today),
+        'exited_position_today': bool(exited_today),
+        'currently_in_position': bool(trader.in_position),
         'days_since_last_trade': None,
         'exit_price_needed': None,
         'current_tecl_price': None,
