@@ -170,7 +170,9 @@ def format_report_text(report):
 
         if report['current_tecl_price']:
             distance_to_buy = report['current_tecl_price'] - targets['immediate_buy']
-            lines.append(f"   Distance to Immediate Buy: ${distance_to_buy:.2f} ({(distance_to_buy/report['current_tecl_price']*100):.1f}%)")
+            distance_pct = (distance_to_buy / report['current_tecl_price'] * 100)
+            # Make it clear which direction: "TECL falls $X" means price needs to drop
+            lines.append(f"   Distance to Immediate Buy: TECL falls ${distance_to_buy:.2f} ({distance_pct:.1f}%)")
 
     lines.append("")
     lines.append("=" * 60)
