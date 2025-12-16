@@ -27,6 +27,10 @@ This system implements a backtesting framework that:
 - Python 3.x
 - pandas
 - numpy
+- yfinance (for live market data)
+- alpaca-py (for live trading execution)
+- python-dotenv
+- pytz
 
 ## Installation
 
@@ -38,8 +42,19 @@ cd trading-algorithm
 
 2. Install required packages:
 ```bash
-pip install pandas numpy
+pip install pandas numpy yfinance alpaca-py python-dotenv pytz
 ```
+
+3. Configure environment variables (see [GITHUB_ACTIONS_SETUP.md](GITHUB_ACTIONS_SETUP.md))
+
+## Data Sources
+
+- **Market Data**: Yahoo Finance (free, no subscription required)
+  - Used for TECL prices and historical data
+  - Used for VIX prices and historical data
+- **Trade Execution**: Alpaca API (paper trading account)
+  - Free paper trading account for testing
+  - Requires API credentials (see setup guides)
 
 ## Project Structure
 
