@@ -7,11 +7,8 @@ from typing import Optional, Dict, Any
 
 import pandas as pd
 from alpaca.trading.client import TradingClient
-from alpaca.trading.requests import MarketOrderRequest, GetAssetsRequest
-from alpaca.trading.enums import OrderSide, TimeInForce, AssetClass
-from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest
-from alpaca.data.timeframe import TimeFrame
+from alpaca.trading.requests import MarketOrderRequest
+from alpaca.trading.enums import OrderSide, TimeInForce
 from dotenv import load_dotenv
 import yfinance as yf
 
@@ -37,9 +34,8 @@ class AlpacaLiveTrader:
         if not self.api_key or not self.secret_key:
             raise ValueError("Alpaca API credentials not found. Check your .env file.")
             
-        # Initialize clients
+        # Initialize trading client (using Yahoo Finance for market data)
         self.trading_client = TradingClient(self.api_key, self.secret_key, paper=True)
-        self.data_client = StockHistoricalDataClient(self.api_key, self.secret_key)
         
         # Trading state
         self.in_position = False
@@ -65,26 +61,16 @@ class AlpacaLiveTrader:
     def get_current_price(self, symbol: str) -> Optional[float]:
         """Get current price for a symbol."""
         try:
+            # Use Yahoo Finance for all symbols to avoid Alpaca SIP subscription issues
             if symbol == 'VIX':
-                # Use Yahoo Finance for VIX
-                vix_ticker = yf.Ticker('^VIX')
-                hist = vix_ticker.history(period='1d')
-                if not hist.empty:
-                    return float(hist['Close'].iloc[-1])
-                return None
+                ticker = yf.Ticker('^VIX')
             else:
-                # Use Alpaca for other symbols (like TECL)
-                request = StockBarsRequest(
-                    symbol_or_symbols=[symbol],
-                    timeframe=TimeFrame.Minute,
-                    start=datetime.now() - timedelta(minutes=5)
-                )
-                bars = self.data_client.get_stock_bars(request)
-                
-                if symbol in bars.data:
-                    latest_bar = bars.data[symbol][-1]
-                    return float(latest_bar.close)
-                return None
+                ticker = yf.Ticker(symbol)
+
+            hist = ticker.history(period='1d')
+            if not hist.empty:
+                return float(hist['Close'].iloc[-1])
+            return None
         except Exception as e:
             logger.error(f"Error getting price for {symbol}: {e}")
             return None
@@ -92,59 +78,28 @@ class AlpacaLiveTrader:
     def get_historical_data(self, symbol: str, days: int = 60) -> pd.DataFrame:
         """Get historical data for indicator calculations."""
         try:
+            # Use Yahoo Finance for all symbols to avoid Alpaca SIP subscription issues
             if symbol == 'VIX':
-                # Use Yahoo Finance for VIX historical data
-                vix_ticker = yf.Ticker('^VIX')
-                hist = vix_ticker.history(period=f'{days}d')
-                
-                if not hist.empty:
-                    # Rename columns to match expected format
-                    hist = hist.rename(columns={
-                        'Open': 'Open',
-                        'High': 'High', 
-                        'Low': 'Low',
-                        'Close': 'Close',
-                        'Volume': 'Volume'
-                    })
-                    return hist
-                else:
-                    logger.warning(f"No VIX data found from Yahoo Finance")
-                    return pd.DataFrame()
+                ticker = yf.Ticker('^VIX')
             else:
-                # Use Alpaca for other symbols (like TECL)
-                end_date = datetime.now()
-                start_date = end_date - timedelta(days=days)
-                
-                request = StockBarsRequest(
-                    symbol_or_symbols=[symbol],
-                    timeframe=TimeFrame.Day,
-                    start=start_date,
-                    end=end_date
-                )
-                
-                bars = self.data_client.get_stock_bars(request)
-                
-                if symbol not in bars.data:
-                    logger.warning(f"No data found for {symbol}")
-                    return pd.DataFrame()
-                
-                # Convert to DataFrame
-                data = []
-                for bar in bars.data[symbol]:
-                    data.append({
-                        'Date': bar.timestamp.date(),
-                        'Open': float(bar.open),
-                        'High': float(bar.high),
-                        'Low': float(bar.low),
-                        'Close': float(bar.close),
-                        'Volume': int(bar.volume)
-                    })
-                
-                df = pd.DataFrame(data)
-                df['Date'] = pd.to_datetime(df['Date'])
-                df.set_index('Date', inplace=True)
-                return df
-            
+                ticker = yf.Ticker(symbol)
+
+            hist = ticker.history(period=f'{days}d')
+
+            if not hist.empty:
+                # Rename columns to match expected format
+                hist = hist.rename(columns={
+                    'Open': 'Open',
+                    'High': 'High',
+                    'Low': 'Low',
+                    'Close': 'Close',
+                    'Volume': 'Volume'
+                })
+                return hist
+            else:
+                logger.warning(f"No data found for {symbol} from Yahoo Finance")
+                return pd.DataFrame()
+
         except Exception as e:
             logger.error(f"Error getting historical data for {symbol}: {e}")
             return pd.DataFrame()
