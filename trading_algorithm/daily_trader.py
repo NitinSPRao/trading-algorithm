@@ -23,7 +23,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def calculate_entry_price_targets(sma, wma, vix):
+def calculate_entry_price_targets(sma, wma, vix_4d_ago, wma_4d_ago, current_tecl_price=None):
     """Calculate what TECL prices would trigger buy signals."""
     targets = {}
 
@@ -33,11 +33,17 @@ def calculate_entry_price_targets(sma, wma, vix):
     # VIX condition buy threshold (if VIX condition is met)
     targets['vix_buy_threshold'] = round(1.25 * sma, 2)
 
-    # Is VIX condition currently met?
-    vix_condition_met = vix > (1.04 * wma)
-    # Convert to native Python bool for JSON serialization
-    targets['vix_condition_active'] = bool(vix_condition_met)
-    targets['vix_threshold'] = round(1.04 * wma, 2)
+    # Is VIX condition currently met? (using VIX from 4 days ago)
+    if vix_4d_ago is not None and wma_4d_ago is not None:
+        vix_condition_met = vix_4d_ago > (1.04 * wma_4d_ago)
+        # Convert to native Python bool for JSON serialization
+        targets['vix_condition_active'] = bool(vix_condition_met)
+        targets['vix_threshold_4d_ago'] = round(1.04 * wma_4d_ago, 2)
+        targets['vix_4d_ago'] = round(vix_4d_ago, 2)
+    else:
+        targets['vix_condition_active'] = False
+        targets['vix_threshold_4d_ago'] = None
+        targets['vix_4d_ago'] = None
 
     return targets
 
@@ -99,11 +105,20 @@ def generate_daily_report(trader, entered_today, exited_today):
             report['wma_vix'] = round(latest['WMA_vix'], 2)
 
             # Calculate entry price targets
-            if report['current_vix'] and report['sma_tecl'] and report['wma_vix']:
+            if report['sma_tecl'] and report['wma_vix']:
+                # Get VIX and WMA from 4 days ago for the condition check
+                vix_4d_ago = None
+                wma_4d_ago = None
+                if len(merged_df) >= 5:
+                    vix_4d_ago = merged_df.iloc[-5]['OPEN_vix']
+                    wma_4d_ago = merged_df.iloc[-5]['WMA_vix']
+
                 report['entry_targets'] = calculate_entry_price_targets(
                     report['sma_tecl'],
                     report['wma_vix'],
-                    report['current_vix']
+                    vix_4d_ago,
+                    wma_4d_ago,
+                    report['current_tecl_price']
                 )
 
     # Position info
@@ -166,7 +181,11 @@ def format_report_text(report):
         lines.append(f"   VIX Buy Threshold: TECL < ${targets['vix_buy_threshold']}")
 
         vix_status = "✅ MET" if targets['vix_condition_active'] else "❌ NOT MET"
-        lines.append(f"   VIX Condition (VIX > ${targets['vix_threshold']}): {vix_status}")
+        if targets['vix_4d_ago'] is not None and targets['vix_threshold_4d_ago'] is not None:
+            lines.append(f"   VIX Condition (VIX 4 days ago > ${targets['vix_threshold_4d_ago']}): {vix_status}")
+            lines.append(f"      VIX 4 days ago: {targets['vix_4d_ago']}")
+        else:
+            lines.append(f"   VIX Condition: ❌ INSUFFICIENT DATA (need 5+ days)")
 
         if report['current_tecl_price']:
             distance_to_buy = report['current_tecl_price'] - targets['immediate_buy']
