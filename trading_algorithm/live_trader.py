@@ -41,6 +41,7 @@ class AlpacaLiveTrader:
         # Trading state
         self.in_position = False
         self.purchase_price = None
+        self.purchase_date = None
         self.position_size = 0
         self.last_sell_date = None
         
@@ -192,6 +193,7 @@ class AlpacaLiveTrader:
         if self.place_order('TECL', OrderSide.BUY, shares):
             self.in_position = True
             self.purchase_price = price
+            self.purchase_date = datetime.now()
             self.position_size = shares
             logger.info(f"BUY: {shares} shares of TECL at ${price:.2f} - {reason}")
             return True
@@ -206,9 +208,10 @@ class AlpacaLiveTrader:
         if self.place_order('TECL', OrderSide.SELL, self.position_size):
             profit_pct = (price / self.purchase_price - 1) * 100
             logger.info(f"SELL: {self.position_size} shares of TECL at ${price:.2f} - Profit: {profit_pct:.2f}%")
-            
+
             self.in_position = False
             self.purchase_price = None
+            self.purchase_date = None
             self.position_size = 0
             self.last_sell_date = datetime.now().date()
             return True
