@@ -4,6 +4,7 @@ import os
 import logging
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
+import time
 
 import pandas as pd
 from alpaca.trading.client import TradingClient
@@ -58,51 +59,75 @@ class AlpacaLiveTrader:
             'day_trade_buying_power': float(getattr(account, 'day_trade_buying_power', account.buying_power))
         }
     
-    def get_current_price(self, symbol: str) -> Optional[float]:
-        """Get current price for a symbol."""
-        try:
-            # Use Yahoo Finance for all symbols to avoid Alpaca SIP subscription issues
-            if symbol == 'VIX':
-                ticker = yf.Ticker('^VIX')
-            else:
-                ticker = yf.Ticker(symbol)
+    def get_current_price(self, symbol: str, max_retries: int = 3, retry_delay: int = 5) -> Optional[float]:
+        """Get current price for a symbol with retry logic."""
+        yf_symbol = '^VIX' if symbol == 'VIX' else symbol
 
-            hist = ticker.history(period='1d')
-            if not hist.empty:
-                return float(hist['Close'].iloc[-1])
-            return None
-        except Exception as e:
-            logger.error(f"Error getting price for {symbol}: {e}")
-            return None
+        for attempt in range(max_retries):
+            try:
+                logger.info(f"Fetching current price for {symbol} (attempt {attempt + 1}/{max_retries})")
+                ticker = yf.Ticker(yf_symbol)
+
+                # Try current day first
+                hist = ticker.history(period='1d')
+
+                # If no data for current day, try last 2 days (handles pre-market/early trading)
+                if hist.empty:
+                    logger.warning(f"No 1d data for {symbol}, trying 2d period")
+                    hist = ticker.history(period='2d')
+
+                if not hist.empty:
+                    price = float(hist['Close'].iloc[-1])
+                    logger.info(f"Successfully fetched {symbol} price: ${price:.2f}")
+                    return price
+                else:
+                    logger.warning(f"No historical data available for {symbol} on attempt {attempt + 1}")
+
+            except Exception as e:
+                logger.error(f"Error getting price for {symbol} on attempt {attempt + 1}: {e}", exc_info=True)
+
+            # Wait before retrying (except on last attempt)
+            if attempt < max_retries - 1:
+                logger.info(f"Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+
+        logger.error(f"Failed to fetch price for {symbol} after {max_retries} attempts")
+        return None
     
-    def get_historical_data(self, symbol: str, days: int = 60) -> pd.DataFrame:
-        """Get historical data for indicator calculations."""
-        try:
-            # Use Yahoo Finance for all symbols to avoid Alpaca SIP subscription issues
-            if symbol == 'VIX':
-                ticker = yf.Ticker('^VIX')
-            else:
-                ticker = yf.Ticker(symbol)
+    def get_historical_data(self, symbol: str, days: int = 60, max_retries: int = 3, retry_delay: int = 5) -> pd.DataFrame:
+        """Get historical data for indicator calculations with retry logic."""
+        yf_symbol = '^VIX' if symbol == 'VIX' else symbol
 
-            hist = ticker.history(period=f'{days}d')
+        for attempt in range(max_retries):
+            try:
+                logger.info(f"Fetching historical data for {symbol} ({days} days, attempt {attempt + 1}/{max_retries})")
+                ticker = yf.Ticker(yf_symbol)
+                hist = ticker.history(period=f'{days}d')
 
-            if not hist.empty:
-                # Rename columns to match expected format
-                hist = hist.rename(columns={
-                    'Open': 'Open',
-                    'High': 'High',
-                    'Low': 'Low',
-                    'Close': 'Close',
-                    'Volume': 'Volume'
-                })
-                return hist
-            else:
-                logger.warning(f"No data found for {symbol} from Yahoo Finance")
-                return pd.DataFrame()
+                if not hist.empty:
+                    logger.info(f"Successfully fetched {len(hist)} rows of historical data for {symbol}")
+                    # Rename columns to match expected format
+                    hist = hist.rename(columns={
+                        'Open': 'Open',
+                        'High': 'High',
+                        'Low': 'Low',
+                        'Close': 'Close',
+                        'Volume': 'Volume'
+                    })
+                    return hist
+                else:
+                    logger.warning(f"No historical data found for {symbol} on attempt {attempt + 1}")
 
-        except Exception as e:
-            logger.error(f"Error getting historical data for {symbol}: {e}")
-            return pd.DataFrame()
+            except Exception as e:
+                logger.error(f"Error getting historical data for {symbol} on attempt {attempt + 1}: {e}", exc_info=True)
+
+            # Wait before retrying (except on last attempt)
+            if attempt < max_retries - 1:
+                logger.info(f"Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+
+        logger.error(f"Failed to fetch historical data for {symbol} after {max_retries} attempts")
+        return pd.DataFrame()
     
     def place_order(self, symbol: str, side: OrderSide, qty: float) -> bool:
         """Place a market order."""

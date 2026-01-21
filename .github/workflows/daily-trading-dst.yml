@@ -2,15 +2,16 @@ name: Daily Trading Algorithm (DST-Aware)
 
 on:
   schedule:
-    # Multiple times with DST handling to account for GitHub Actions delays
+    # Multiple times with DST handling - runs at 9:35, 9:40, 9:45 AM ET
+    # Later timing ensures Yahoo Finance has market data available
     # Standard Time (Nov-Mar): ET = UTC-5
-    - cron: '25 14 * 11-12,1-3 1-5'  # 9:25 AM ET
-    - cron: '30 14 * 11-12,1-3 1-5'  # 9:30 AM ET (primary)
-    - cron: '35 14 * 11-12,1-3 1-5'  # 9:35 AM ET (backup)
+    - cron: '35 14 * 11-12,1-3 1-5'  # 9:35 AM ET (primary)
+    - cron: '40 14 * 11-12,1-3 1-5'  # 9:40 AM ET (backup)
+    - cron: '45 14 * 11-12,1-3 1-5'  # 9:45 AM ET (final backup)
     # Daylight Saving Time (Mar-Nov): ET = UTC-4
-    - cron: '25 13 * 4-10 1-5'  # 9:25 AM EDT
-    - cron: '30 13 * 4-10 1-5'  # 9:30 AM EDT (primary)
-    - cron: '35 13 * 4-10 1-5'  # 9:35 AM EDT (backup)
+    - cron: '35 13 * 4-10 1-5'  # 9:35 AM EDT (primary)
+    - cron: '40 13 * 4-10 1-5'  # 9:40 AM EDT (backup)
+    - cron: '45 13 * 4-10 1-5'  # 9:45 AM EDT (final backup)
 
   workflow_dispatch:  # Allows manual trigger from GitHub UI
     inputs:
