@@ -59,13 +59,18 @@ class AlpacaLiveTrader:
             'day_trade_buying_power': float(getattr(account, 'day_trade_buying_power', account.buying_power))
         }
     
-    def get_current_price(self, symbol: str, max_retries: int = 3, retry_delay: int = 5) -> Optional[float]:
-        """Get current price for a symbol with retry logic."""
+    def get_current_price(self, symbol: str, max_retries: int = 3) -> Optional[float]:
+        """Get current price for a symbol with retry logic and exponential backoff."""
         yf_symbol = '^VIX' if symbol == 'VIX' else symbol
 
         for attempt in range(max_retries):
             try:
                 logger.info(f"Fetching current price for {symbol} (attempt {attempt + 1}/{max_retries})")
+
+                # Add delay between requests to avoid rate limiting
+                if attempt == 0:
+                    time.sleep(2)  # 2 second delay before first request
+
                 ticker = yf.Ticker(yf_symbol)
 
                 # Try current day first
@@ -74,6 +79,7 @@ class AlpacaLiveTrader:
                 # If no data for current day, try last 2 days (handles pre-market/early trading)
                 if hist.empty:
                     logger.warning(f"No 1d data for {symbol}, trying 2d period")
+                    time.sleep(3)  # Extra delay before retry
                     hist = ticker.history(period='2d')
 
                 if not hist.empty:
@@ -84,23 +90,35 @@ class AlpacaLiveTrader:
                     logger.warning(f"No historical data available for {symbol} on attempt {attempt + 1}")
 
             except Exception as e:
-                logger.error(f"Error getting price for {symbol} on attempt {attempt + 1}: {e}", exc_info=True)
+                error_msg = str(e)
+                is_rate_limit = 'rate limit' in error_msg.lower() or 'too many requests' in error_msg.lower()
 
-            # Wait before retrying (except on last attempt)
-            if attempt < max_retries - 1:
-                logger.info(f"Retrying in {retry_delay} seconds...")
-                time.sleep(retry_delay)
+                if is_rate_limit:
+                    logger.warning(f"Rate limited on attempt {attempt + 1} for {symbol}")
+                else:
+                    logger.error(f"Error getting price for {symbol} on attempt {attempt + 1}: {e}", exc_info=False)
+
+                # Exponential backoff for rate limits: 15s, 45s, 90s
+                if attempt < max_retries - 1:
+                    wait_time = 15 * (3 ** attempt) if is_rate_limit else 10
+                    logger.info(f"Waiting {wait_time} seconds before retry...")
+                    time.sleep(wait_time)
 
         logger.error(f"Failed to fetch price for {symbol} after {max_retries} attempts")
         return None
     
-    def get_historical_data(self, symbol: str, days: int = 60, max_retries: int = 3, retry_delay: int = 5) -> pd.DataFrame:
-        """Get historical data for indicator calculations with retry logic."""
+    def get_historical_data(self, symbol: str, days: int = 60, max_retries: int = 3) -> pd.DataFrame:
+        """Get historical data for indicator calculations with retry logic and exponential backoff."""
         yf_symbol = '^VIX' if symbol == 'VIX' else symbol
 
         for attempt in range(max_retries):
             try:
                 logger.info(f"Fetching historical data for {symbol} ({days} days, attempt {attempt + 1}/{max_retries})")
+
+                # Add delay between requests to avoid rate limiting
+                if attempt == 0:
+                    time.sleep(3)  # 3 second delay before first request
+
                 ticker = yf.Ticker(yf_symbol)
                 hist = ticker.history(period=f'{days}d')
 
@@ -119,12 +137,19 @@ class AlpacaLiveTrader:
                     logger.warning(f"No historical data found for {symbol} on attempt {attempt + 1}")
 
             except Exception as e:
-                logger.error(f"Error getting historical data for {symbol} on attempt {attempt + 1}: {e}", exc_info=True)
+                error_msg = str(e)
+                is_rate_limit = 'rate limit' in error_msg.lower() or 'too many requests' in error_msg.lower()
 
-            # Wait before retrying (except on last attempt)
-            if attempt < max_retries - 1:
-                logger.info(f"Retrying in {retry_delay} seconds...")
-                time.sleep(retry_delay)
+                if is_rate_limit:
+                    logger.warning(f"Rate limited on attempt {attempt + 1} for {symbol}")
+                else:
+                    logger.error(f"Error getting historical data for {symbol} on attempt {attempt + 1}: {e}", exc_info=False)
+
+                # Exponential backoff for rate limits: 20s, 60s, 120s
+                if attempt < max_retries - 1:
+                    wait_time = 20 * (3 ** attempt) if is_rate_limit else 10
+                    logger.info(f"Waiting {wait_time} seconds before retry...")
+                    time.sleep(wait_time)
 
         logger.error(f"Failed to fetch historical data for {symbol} after {max_retries} attempts")
         return pd.DataFrame()
