@@ -47,9 +47,34 @@ class AlpacaLiveTrader:
         
         # Configuration
         self.position_size_limit = float(os.getenv('POSITION_SIZE_LIMIT', 0.95))
-        
+
+        # Sync position state with Alpaca
+        self._sync_position_state()
+
         logger.info("AlpacaLiveTrader initialized successfully")
     
+    def _sync_position_state(self) -> None:
+        """Sync position state with Alpaca on initialization."""
+        try:
+            positions = self.trading_client.get_all_positions()
+
+            # Check if we have a TECL position
+            for position in positions:
+                if position.symbol == 'TECL':
+                    self.in_position = True
+                    self.position_size = int(position.qty)
+                    self.purchase_price = float(position.avg_entry_price)
+                    # We don't have the exact purchase date from Alpaca, so estimate from today
+                    self.purchase_date = datetime.now()
+                    logger.info(f"Synced existing TECL position: {self.position_size} shares at ${self.purchase_price:.2f}")
+                    return
+
+            logger.info("No existing TECL position found")
+
+        except Exception as e:
+            logger.warning(f"Error syncing position state: {e}")
+            # Continue with default state (no position)
+
     def get_account_info(self) -> dict[str, Any]:
         """Get current account information."""
         account = self.trading_client.get_account()
