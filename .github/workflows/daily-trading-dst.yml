@@ -111,6 +111,30 @@ jobs:
         echo "Trading algorithm exit code: $EXIT_CODE"
         exit $EXIT_CODE
 
+    - name: Commit trading state
+      if: steps.check_run.outputs.already_ran != 'true'
+      run: |
+        # Configure git
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+
+        # Check if state file exists and has changes
+        if [ -f logs/trading_state.json ]; then
+          git add logs/trading_state.json
+
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to trading state"
+          else
+            TODAY=$(TZ='America/New_York' date '+%Y-%m-%d %I:%M:%S %p ET')
+            git commit -m "Update trading state - $TODAY"
+            git push
+            echo "✅ Trading state committed and pushed"
+          fi
+        else
+          echo "No trading state file found (no trades executed)"
+        fi
+
     - name: Display daily report
       if: always()
       run: |

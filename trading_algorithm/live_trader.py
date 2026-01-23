@@ -5,6 +5,7 @@ import logging
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 import time
+import json
 
 import pandas as pd
 from alpaca.trading.client import TradingClient
@@ -25,51 +26,124 @@ logger = logging.getLogger(__name__)
 
 class AlpacaLiveTrader:
     """Live trading implementation using Alpaca API."""
-    
+
     def __init__(self):
         """Initialize the live trader with Alpaca credentials."""
         self.api_key = os.getenv('ALPACA_API_KEY')
-        self.secret_key = os.getenv('ALPACA_SECRET_KEY') 
+        self.secret_key = os.getenv('ALPACA_SECRET_KEY')
         self.base_url = os.getenv('ALPACA_BASE_URL', 'https://paper-api.alpaca.markets/v2')
-        
+
         if not self.api_key or not self.secret_key:
             raise ValueError("Alpaca API credentials not found. Check your .env file.")
-            
+
         # Initialize trading client (using Yahoo Finance for market data)
         self.trading_client = TradingClient(self.api_key, self.secret_key, paper=True)
-        
+
         # Trading state
         self.in_position = False
         self.purchase_price = None
         self.purchase_date = None
         self.position_size = 0
         self.last_sell_date = None
-        
+
         # Configuration
         self.position_size_limit = float(os.getenv('POSITION_SIZE_LIMIT', 0.95))
+
+        # State file path
+        self.state_file = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)),
+            'logs',
+            'trading_state.json'
+        )
 
         # Sync position state with Alpaca
         self._sync_position_state()
 
         logger.info("AlpacaLiveTrader initialized successfully")
     
+    def _load_state(self) -> Optional[Dict[str, Any]]:
+        """Load trading state from file."""
+        try:
+            if os.path.exists(self.state_file):
+                with open(self.state_file, 'r') as f:
+                    state = json.load(f)
+                logger.info(f"Loaded state from {self.state_file}")
+                return state
+        except Exception as e:
+            logger.warning(f"Error loading state file: {e}")
+        return None
+
+    def _save_state(self) -> None:
+        """Save current trading state to file."""
+        try:
+            os.makedirs(os.path.dirname(self.state_file), exist_ok=True)
+
+            state = {
+                'in_position': self.in_position,
+                'purchase_price': self.purchase_price,
+                'purchase_date': self.purchase_date.isoformat() if self.purchase_date else None,
+                'position_size': self.position_size,
+                'last_sell_date': self.last_sell_date.isoformat() if self.last_sell_date else None,
+                'last_updated': datetime.now().isoformat()
+            }
+
+            with open(self.state_file, 'w') as f:
+                json.dump(state, f, indent=2)
+
+            logger.info(f"Saved state to {self.state_file}")
+
+        except Exception as e:
+            logger.error(f"Error saving state file: {e}")
+
     def _sync_position_state(self) -> None:
         """Sync position state with Alpaca on initialization."""
         try:
+            # First, try to load state from file
+            saved_state = self._load_state()
+
+            # Then check Alpaca for current positions
             positions = self.trading_client.get_all_positions()
 
             # Check if we have a TECL position
+            tecl_position = None
             for position in positions:
                 if position.symbol == 'TECL':
-                    self.in_position = True
-                    self.position_size = int(position.qty)
-                    self.purchase_price = float(position.avg_entry_price)
-                    # We don't have the exact purchase date from Alpaca, so estimate from today
-                    self.purchase_date = datetime.now()
-                    logger.info(f"Synced existing TECL position: {self.position_size} shares at ${self.purchase_price:.2f}")
-                    return
+                    tecl_position = position
+                    break
 
-            logger.info("No existing TECL position found")
+            if tecl_position:
+                # We have a position in Alpaca
+                self.in_position = True
+                self.position_size = int(tecl_position.qty)
+                self.purchase_price = float(tecl_position.avg_entry_price)
+
+                # Try to restore purchase_date from saved state
+                if saved_state and saved_state.get('in_position') and saved_state.get('purchase_date'):
+                    try:
+                        self.purchase_date = datetime.fromisoformat(saved_state['purchase_date'])
+                        logger.info(f"Restored purchase_date from state: {self.purchase_date}")
+                    except Exception as e:
+                        logger.warning(f"Error parsing purchase_date from state: {e}")
+                        self.purchase_date = datetime.now()
+                        logger.warning("Using current date as purchase_date fallback")
+                else:
+                    # No saved state with purchase date
+                    self.purchase_date = datetime.now()
+                    logger.warning("No saved purchase_date found, using current date as fallback")
+
+                logger.info(f"Synced existing TECL position: {self.position_size} shares at ${self.purchase_price:.2f}, purchased on {self.purchase_date}")
+
+            else:
+                # No position in Alpaca
+                logger.info("No existing TECL position found")
+
+                # Restore last_sell_date from saved state if available
+                if saved_state and saved_state.get('last_sell_date'):
+                    try:
+                        self.last_sell_date = datetime.fromisoformat(saved_state['last_sell_date']).date()
+                        logger.info(f"Restored last_sell_date from state: {self.last_sell_date}")
+                    except Exception as e:
+                        logger.warning(f"Error parsing last_sell_date from state: {e}")
 
         except Exception as e:
             logger.warning(f"Error syncing position state: {e}")
@@ -221,6 +295,10 @@ class AlpacaLiveTrader:
             self.purchase_date = datetime.now()
             self.position_size = shares
             logger.info(f"BUY: {shares} shares of TECL at ${price:.2f} - {reason}")
+
+            # Save state after successful purchase
+            self._save_state()
+
             return True
         return False
     
@@ -239,6 +317,10 @@ class AlpacaLiveTrader:
             self.purchase_date = None
             self.position_size = 0
             self.last_sell_date = datetime.now().date()
+
+            # Save state after successful sale
+            self._save_state()
+
             return True
         return False
     
