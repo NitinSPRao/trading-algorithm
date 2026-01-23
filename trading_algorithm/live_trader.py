@@ -5,7 +5,6 @@ import logging
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 import time
-import json
 
 import pandas as pd
 from alpaca.trading.client import TradingClient
@@ -15,6 +14,7 @@ from dotenv import load_dotenv
 import yfinance as yf
 
 from .backtesting import calculate_indicators
+from .dynamodb_handler import DynamoDBHandler
 
 # Load environment variables
 load_dotenv()
@@ -39,6 +39,9 @@ class AlpacaLiveTrader:
         # Initialize trading client (using Yahoo Finance for market data)
         self.trading_client = TradingClient(self.api_key, self.secret_key, paper=True)
 
+        # Initialize DynamoDB handler
+        self.db = DynamoDBHandler()
+
         # Trading state
         self.in_position = False
         self.purchase_price = None
@@ -49,51 +52,41 @@ class AlpacaLiveTrader:
         # Configuration
         self.position_size_limit = float(os.getenv('POSITION_SIZE_LIMIT', 0.95))
 
-        # State file path
-        self.state_file = os.path.join(
-            os.path.dirname(os.path.dirname(__file__)),
-            'logs',
-            'trading_state.json'
-        )
-
-        # Sync position state with Alpaca
+        # Sync position state with Alpaca and DynamoDB
         self._sync_position_state()
 
         logger.info("AlpacaLiveTrader initialized successfully")
     
     def _load_state(self) -> Optional[Dict[str, Any]]:
-        """Load trading state from file."""
+        """Load trading state from DynamoDB."""
         try:
-            if os.path.exists(self.state_file):
-                with open(self.state_file, 'r') as f:
-                    state = json.load(f)
-                logger.info(f"Loaded state from {self.state_file}")
+            state = self.db.load_state(trader_id="main")
+            if state:
+                logger.info("Loaded state from DynamoDB")
                 return state
         except Exception as e:
-            logger.warning(f"Error loading state file: {e}")
+            logger.warning(f"Error loading state from DynamoDB: {e}")
         return None
 
     def _save_state(self) -> None:
-        """Save current trading state to file."""
+        """Save current trading state to DynamoDB."""
         try:
-            os.makedirs(os.path.dirname(self.state_file), exist_ok=True)
+            success = self.db.save_state(
+                in_position=self.in_position,
+                purchase_price=self.purchase_price,
+                purchase_date=self.purchase_date.isoformat() if self.purchase_date else None,
+                position_size=self.position_size,
+                last_sell_date=self.last_sell_date.isoformat() if isinstance(self.last_sell_date, datetime) else str(self.last_sell_date) if self.last_sell_date else None,
+                trader_id="main"
+            )
 
-            state = {
-                'in_position': self.in_position,
-                'purchase_price': self.purchase_price,
-                'purchase_date': self.purchase_date.isoformat() if self.purchase_date else None,
-                'position_size': self.position_size,
-                'last_sell_date': self.last_sell_date.isoformat() if self.last_sell_date else None,
-                'last_updated': datetime.now().isoformat()
-            }
-
-            with open(self.state_file, 'w') as f:
-                json.dump(state, f, indent=2)
-
-            logger.info(f"Saved state to {self.state_file}")
+            if success:
+                logger.info("Saved state to DynamoDB")
+            else:
+                logger.error("Failed to save state to DynamoDB")
 
         except Exception as e:
-            logger.error(f"Error saving state file: {e}")
+            logger.error(f"Error saving state to DynamoDB: {e}")
 
     def _sync_position_state(self) -> None:
         """Sync position state with Alpaca on initialization."""
@@ -299,6 +292,16 @@ class AlpacaLiveTrader:
             # Save state after successful purchase
             self._save_state()
 
+            # Log buy event to DynamoDB
+            self.db.log_event(
+                event_type="BUY",
+                symbol="TECL",
+                price=price,
+                quantity=shares,
+                success=True,
+                details={"reason": reason, "buying_power_used_pct": self.position_size_limit}
+            )
+
             return True
         return False
     
@@ -310,7 +313,23 @@ class AlpacaLiveTrader:
         
         if self.place_order('TECL', OrderSide.SELL, self.position_size):
             profit_pct = (price / self.purchase_price - 1) * 100
+            profit_dollars = (price - self.purchase_price) * self.position_size
             logger.info(f"SELL: {self.position_size} shares of TECL at ${price:.2f} - Profit: {profit_pct:.2f}%")
+
+            # Log sell event to DynamoDB before clearing state
+            self.db.log_event(
+                event_type="SELL",
+                symbol="TECL",
+                price=price,
+                quantity=self.position_size,
+                success=True,
+                details={
+                    "purchase_price": self.purchase_price,
+                    "profit_pct": profit_pct,
+                    "profit_dollars": profit_dollars,
+                    "hold_days": (datetime.now() - self.purchase_date).days if self.purchase_date else None
+                }
+            )
 
             self.in_position = False
             self.purchase_price = None
@@ -367,9 +386,24 @@ class AlpacaLiveTrader:
         latest = merged_df.iloc[-1]
         sma = latest['SMA_tecl']
         wma = latest['WMA_vix']
-        
+
         logger.info(f"TECL: ${tecl_price:.2f}, SMA: ${sma:.2f}, VIX: ${vix_price:.2f}, WMA: ${wma:.2f}")
-        
+
+        # Log signal check event
+        self.db.log_event(
+            event_type="SIGNAL_CHECK",
+            symbol="TECL",
+            price=tecl_price,
+            vix=vix_price,
+            sma_tecl=sma,
+            wma_vix=wma,
+            details={
+                "in_position": self.in_position,
+                "purchase_price": self.purchase_price,
+                "position_size": self.position_size
+            }
+        )
+
         # Check sell criteria first
         if self.in_position and tecl_price >= self.purchase_price * 1.058:
             self.sell_tecl(tecl_price)

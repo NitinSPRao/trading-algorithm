@@ -74,7 +74,7 @@ jobs:
       if: steps.check_run.outputs.already_ran != 'true'
       run: |
         python -m pip install --upgrade pip
-        pip install pandas numpy yfinance alpaca-py python-dotenv pytz schedule
+        pip install pandas numpy yfinance alpaca-py python-dotenv pytz schedule boto3
 
     - name: Verify time and market hours
       if: steps.check_run.outputs.already_ran != 'true'
@@ -100,6 +100,11 @@ jobs:
         ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
         ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
         POSITION_SIZE_LIMIT: ${{ secrets.POSITION_SIZE_LIMIT }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: us-east-2
+        DYNAMODB_STATE_TABLE: trading_state
+        DYNAMODB_EVENTS_TABLE: trading_events
         LOG_LEVEL: INFO
       run: |
         echo "=========================================="
@@ -111,29 +116,13 @@ jobs:
         echo "Trading algorithm exit code: $EXIT_CODE"
         exit $EXIT_CODE
 
-    - name: Commit trading state
+    - name: Verify DynamoDB state sync
       if: steps.check_run.outputs.already_ran != 'true'
       run: |
-        # Configure git
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-
-        # Check if state file exists and has changes
-        if [ -f logs/trading_state.json ]; then
-          git add logs/trading_state.json
-
-          # Only commit if there are changes
-          if git diff --staged --quiet; then
-            echo "No changes to trading state"
-          else
-            TODAY=$(TZ='America/New_York' date '+%Y-%m-%d %I:%M:%S %p ET')
-            git commit -m "Update trading state - $TODAY"
-            git push
-            echo "✅ Trading state committed and pushed"
-          fi
-        else
-          echo "No trading state file found (no trades executed)"
-        fi
+        echo "=========================================="
+        echo "Trading state is now stored in DynamoDB"
+        echo "No git commits needed for state persistence"
+        echo "=========================================="
 
     - name: Display daily report
       if: always()

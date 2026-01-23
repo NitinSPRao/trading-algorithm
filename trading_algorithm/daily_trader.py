@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 import pytz
 import json
 from .live_trader import AlpacaLiveTrader
+from .dynamodb_handler import DynamoDBHandler
 
 # Configure logging
 log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'logs')
@@ -188,14 +189,14 @@ def format_report_text(report):
             lines.append(f"   Position Entry Date: {report['position_entry_date']}")
         if report['position_entry_size']:
             entry_value = report['position_entry_price'] * report['position_entry_size']
-            lines.append(f"   Position Entry Size: ${entry_value:.2f}")
+            lines.append(f"   Position Entry Size: ${entry_value:,.2f}")
         if report['position_entry_price']:
-            lines.append(f"   Position Entry Price: TECL = ${report['position_entry_price']}")
+            lines.append(f"   Position Entry Price: TECL = ${report['position_entry_price']:,.2f}")
         if report['position_gain_loss_pct'] is not None and report['position_current_value']:
             gain_loss_sign = '+' if report['position_gain_loss_pct'] >= 0 else ''
-            lines.append(f"   Position Gain (Loss): {gain_loss_sign}{report['position_gain_loss_pct']:.1f}%, ${report['position_current_value']:.2f}")
+            lines.append(f"   Position Gain (Loss): {gain_loss_sign}{report['position_gain_loss_pct']:.1f}%, ${report['position_current_value']:,.2f}")
         if report['exit_price_needed']:
-            lines.append(f"   Price Needed for Exit: TECL = ${report['exit_price_needed']}")
+            lines.append(f"   Price Needed for Exit: TECL = ${report['exit_price_needed']:,.2f}")
     else:
         lines.append(f"   Status: NO POSITION")
         if report['days_since_last_trade'] is not None:
@@ -204,9 +205,15 @@ def format_report_text(report):
 
     # Market Data
     lines.append("CURRENT MARKET DATA:")
-    lines.append(f"   TECL Price: ${report['current_tecl_price'] or 'N/A'}")
-    lines.append(f"   VIX: {report['current_vix'] or 'N/A'}")
-    lines.append(f"   TECL 30-day SMA: ${report['sma_tecl'] or 'N/A'}")
+    if report['current_tecl_price']:
+        lines.append(f"   TECL Price: ${report['current_tecl_price']:,.2f}")
+    else:
+        lines.append("   TECL Price: N/A")
+    lines.append(f"   VIX: {report['vix_history'][4]}")
+    if report['sma_tecl']:
+        lines.append(f"   TECL 30-day SMA: ${report['sma_tecl']:,.2f}")
+    else:
+        lines.append("   TECL 30-day SMA: N/A")
     lines.append(f"   VIX 30-day WMA: {report['wma_vix'] or 'N/A'}")
     lines.append("")
 
@@ -225,21 +232,21 @@ def format_report_text(report):
     if report['entry_targets']:
         lines.append("ENTRY PRICE TARGETS:")
         targets = report['entry_targets']
-        lines.append(f"   Immediate Buy if TECL < ${targets['immediate_buy']}")
-        lines.append(f"   VIX Buy Threshold: TECL < ${targets['vix_buy_threshold']}")
+        lines.append(f"   Immediate Buy if TECL < ${targets['immediate_buy']:,.2f}")
+        lines.append(f"   VIX Buy Threshold: TECL < ${targets['vix_buy_threshold']:,.2f}")
 
         vix_status = "MET" if targets['vix_condition_active'] else "NOT MET"
         if targets['vix_4d_ago'] is not None and targets['vix_threshold_4d_ago'] is not None:
             lines.append(f"   VIX Condition (VIX 4 days ago > ${targets['vix_threshold_4d_ago']}): {vix_status}")
             lines.append(f"      VIX 4 days ago: {targets['vix_4d_ago']}")
         else:
-            lines.append(f"   VIX Condition: INSUFFICIENT DATA (need 5+ days)")
+            lines.append("   VIX Condition: INSUFFICIENT DATA (need 5+ days)")
 
         if report['current_tecl_price']:
             distance_to_buy = report['current_tecl_price'] - targets['immediate_buy']
             distance_pct = (distance_to_buy / report['current_tecl_price'] * 100)
             # Make it clear which direction: "TECL falls $X" means price needs to drop
-            lines.append(f"   Distance to Immediate Buy: TECL falls ${distance_to_buy:.2f} ({distance_pct:.1f}%)")
+            lines.append(f"   Distance to Immediate Buy: TECL falls ${distance_to_buy:,.2f} ({distance_pct:.1f}%)")
 
     lines.append("")
     lines.append("=" * 60)
@@ -312,6 +319,27 @@ def run_daily_trade():
         report_text_file = os.path.join(log_dir, 'daily_report.txt')
         with open(report_text_file, 'w') as f:
             f.write(report_text)
+
+        # Log daily report event to DynamoDB
+        db = DynamoDBHandler()
+        db.log_event(
+            event_type="DAILY_REPORT",
+            symbol="TECL",
+            price=report.get('current_tecl_price'),
+            vix=report.get('current_vix'),
+            sma_tecl=report.get('sma_tecl'),
+            wma_vix=report.get('wma_vix'),
+            details={
+                "entered_position_today": entered_today,
+                "exited_position_today": exited_today,
+                "currently_in_position": report.get('currently_in_position'),
+                "entry_targets": report.get('entry_targets'),
+                "portfolio_value": account_info['portfolio_value'],
+                "buying_power": account_info['buying_power'],
+                "position_gain_loss_pct": report.get('position_gain_loss_pct'),
+                "position_gain_loss_dollars": report.get('position_gain_loss_dollars')
+            }
+        )
 
         logger.info("\n" + "=" * 80)
         logger.info("Daily trading check completed")
