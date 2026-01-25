@@ -49,10 +49,59 @@ def calculate_entry_price_targets(sma, wma, vix_4d_ago, wma_4d_ago, current_tecl
     return targets
 
 
+def calculate_fund_metrics(db):
+    """Calculate fund performance metrics from DynamoDB events."""
+    # Get all BUY and SELL events
+    buy_events = db.get_recent_events(event_type="BUY", limit=1000)
+    sell_events = db.get_recent_events(event_type="SELL", limit=1000)
+
+    # Fund inception date - date of first BUY event
+    fund_inception_date = None
+    days_active = 0
+    total_positions_entered = len(buy_events)
+    total_positions_exited = len(sell_events)
+
+    if buy_events:
+        # Sort buy events by timestamp to find the first one
+        buy_events_sorted = sorted(buy_events, key=lambda x: x.get('timestamp', ''))
+        first_buy = buy_events_sorted[0]
+        fund_inception_date = first_buy.get('timestamp', '').split('T')[0]  # Get YYYY-MM-DD
+
+        # Calculate days since inception
+        if fund_inception_date:
+            inception_dt = datetime.fromisoformat(fund_inception_date)
+            days_active = (datetime.now() - inception_dt).days
+
+    # Calculate total invested (sum of all BUY transactions)
+    total_invested = sum(
+        event.get('price', 0) * event.get('quantity', 0)
+        for event in buy_events
+    )
+
+    # Calculate total received from sales (sum of all SELL transactions)
+    total_received = sum(
+        event.get('price', 0) * event.get('quantity', 0)
+        for event in sell_events
+    )
+
+    return {
+        'fund_inception_date': fund_inception_date,
+        'days_active': days_active,
+        'total_positions_entered': total_positions_entered,
+        'total_positions_exited': total_positions_exited,
+        'total_invested': total_invested,
+        'total_received': total_received,
+    }
+
+
 def generate_daily_report(trader, entered_today, exited_today):
     """Generate a comprehensive daily trading report."""
     et_tz = pytz.timezone('US/Eastern')
     now_et = datetime.now(et_tz)
+
+    # Get fund performance metrics from DynamoDB
+    db = DynamoDBHandler()
+    fund_metrics = calculate_fund_metrics(db)
 
     report = {
         'date': now_et.strftime('%Y-%m-%d'),
@@ -73,7 +122,17 @@ def generate_daily_report(trader, entered_today, exited_today):
         'position_entry_price': None,
         'position_gain_loss_pct': None,
         'position_gain_loss_dollars': None,
-        'position_current_value': None
+        'position_current_value': None,
+        # Fund performance metrics
+        'fund_inception_date': fund_metrics['fund_inception_date'] or 'Not Started',
+        'fund_days_active': fund_metrics['days_active'],
+        'total_positions_entered': fund_metrics['total_positions_entered'],
+        'total_positions_exited': fund_metrics['total_positions_exited'],
+        'total_invested': fund_metrics['total_invested'],
+        'total_received': fund_metrics['total_received'],
+        'current_balance': None,
+        'total_returns_pct': None,
+        'annualized_returns_pct': None,
     }
 
     # Get current prices and indicators
@@ -164,7 +223,46 @@ def generate_daily_report(trader, entered_today, exited_today):
         days_since = (now_et.date() - trader.last_sell_date).days
         report['days_since_last_trade'] = days_since
 
+    # Get account info for current balance and returns calculation
+    account_info = trader.get_account_info()
+    report['current_balance'] = account_info['portfolio_value']
+
+    # Calculate returns if we have invested capital
+    if report['total_invested'] > 0:
+        # Current value = cash received from sells + current position value (if any)
+        current_value = report['total_received']
+        if report['position_current_value']:
+            current_value += report['position_current_value']
+        else:
+            # If no position, current value is just the account balance
+            current_value = report['current_balance']
+
+        # Total returns percentage
+        total_returns = ((current_value - report['total_invested']) / report['total_invested']) * 100
+        report['total_returns_pct'] = round(total_returns, 2)
+
+        # Annualized returns (only if fund has been active for at least 1 day)
+        if report['fund_days_active'] > 0:
+            years_active = report['fund_days_active'] / 365.25
+            # Annualized return = ((current_value / total_invested) ^ (1 / years)) - 1
+            annualized_returns = (((current_value / report['total_invested']) ** (1 / years_active)) - 1) * 100
+            report['annualized_returns_pct'] = round(annualized_returns, 2)
+        else:
+            report['annualized_returns_pct'] = 0.0
+    else:
+        report['total_returns_pct'] = 0.0
+        report['annualized_returns_pct'] = 0.0
+
     return report
+
+
+def format_number(value):
+    """Format numbers with commas for values > 9999."""
+    if value is None:
+        return 'N/A'
+    if abs(value) > 9999:
+        return f"{value:,.2f}"
+    return f"{value:.2f}"
 
 
 def format_report_text(report):
@@ -173,6 +271,18 @@ def format_report_text(report):
     lines.append("=" * 60)
     lines.append(f"DAILY TRADING REPORT - {report['date']} {report['time']}")
     lines.append("=" * 60)
+    lines.append("")
+
+    # Fund Performance Summary
+    lines.append("FUND PERFORMANCE:")
+    lines.append(f"   Date of fund inception: {report['fund_inception_date']}")
+    lines.append(f"   Days fund has been active: {report['fund_days_active']} Days")
+    lines.append(f"   Total number of positions entered: {report['total_positions_entered']}")
+    lines.append(f"   Total number of positions exited: {report['total_positions_exited']}")
+    lines.append(f"   Total invested: ${format_number(report['total_invested'])}")
+    lines.append(f"   Current balance: ${format_number(report['current_balance'])}")
+    lines.append(f"   Total returns: {report['total_returns_pct']}%")
+    lines.append(f"   Annualized returns: {report['annualized_returns_pct']}%")
     lines.append("")
 
     # Trading Activity
@@ -189,14 +299,14 @@ def format_report_text(report):
             lines.append(f"   Position Entry Date: {report['position_entry_date']}")
         if report['position_entry_size']:
             entry_value = report['position_entry_price'] * report['position_entry_size']
-            lines.append(f"   Position Entry Size: ${entry_value:,.2f}")
+            lines.append(f"   Position Entry Size: ${format_number(entry_value)}")
         if report['position_entry_price']:
-            lines.append(f"   Position Entry Price: TECL = ${report['position_entry_price']:,.2f}")
+            lines.append(f"   Position Entry Price: TECL = ${format_number(report['position_entry_price'])}")
         if report['position_gain_loss_pct'] is not None and report['position_current_value']:
             gain_loss_sign = '+' if report['position_gain_loss_pct'] >= 0 else ''
-            lines.append(f"   Position Gain (Loss): {gain_loss_sign}{report['position_gain_loss_pct']:.1f}%, ${report['position_current_value']:,.2f}")
+            lines.append(f"   Position Gain (Loss): {gain_loss_sign}{report['position_gain_loss_pct']:.1f}%, ${format_number(report['position_current_value'])}")
         if report['exit_price_needed']:
-            lines.append(f"   Price Needed for Exit: TECL = ${report['exit_price_needed']:,.2f}")
+            lines.append(f"   Price Needed for Exit: TECL = ${format_number(report['exit_price_needed'])}")
     else:
         lines.append(f"   Status: NO POSITION")
         if report['days_since_last_trade'] is not None:
@@ -206,12 +316,12 @@ def format_report_text(report):
     # Market Data
     lines.append("CURRENT MARKET DATA:")
     if report['current_tecl_price']:
-        lines.append(f"   TECL Price: ${report['current_tecl_price']:,.2f}")
+        lines.append(f"   TECL Price: ${format_number(report['current_tecl_price'])}")
     else:
         lines.append("   TECL Price: N/A")
     lines.append(f"   VIX: {report['vix_history'][4]}")
     if report['sma_tecl']:
-        lines.append(f"   TECL 30-day SMA: ${report['sma_tecl']:,.2f}")
+        lines.append(f"   TECL 30-day SMA: ${format_number(report['sma_tecl'])}")
     else:
         lines.append("   TECL 30-day SMA: N/A")
     lines.append(f"   VIX 30-day WMA: {report['wma_vix'] or 'N/A'}")
@@ -232,8 +342,8 @@ def format_report_text(report):
     if report['entry_targets']:
         lines.append("ENTRY PRICE TARGETS:")
         targets = report['entry_targets']
-        lines.append(f"   Immediate Buy if TECL < ${targets['immediate_buy']:,.2f}")
-        lines.append(f"   VIX Buy Threshold: TECL < ${targets['vix_buy_threshold']:,.2f}")
+        lines.append(f"   Immediate Buy if TECL < ${format_number(targets['immediate_buy'])}")
+        lines.append(f"   VIX Buy Threshold: TECL < ${format_number(targets['vix_buy_threshold'])}")
 
         vix_status = "MET" if targets['vix_condition_active'] else "NOT MET"
         if targets['vix_4d_ago'] is not None and targets['vix_threshold_4d_ago'] is not None:
@@ -246,7 +356,7 @@ def format_report_text(report):
             distance_to_buy = report['current_tecl_price'] - targets['immediate_buy']
             distance_pct = (distance_to_buy / report['current_tecl_price'] * 100)
             # Make it clear which direction: "TECL falls $X" means price needs to drop
-            lines.append(f"   Distance to Immediate Buy: TECL falls ${distance_to_buy:,.2f} ({distance_pct:.1f}%)")
+            lines.append(f"   Distance to Immediate Buy: TECL falls ${format_number(distance_to_buy)} ({distance_pct:.1f}%)")
 
     lines.append("")
     lines.append("=" * 60)
