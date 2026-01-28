@@ -78,3 +78,6 @@ htmlcov/
 .dmypy.json
 dmypy.json
 AWSCLIV2.pkg
+
+
+PRODUCTION_SPEC.md
