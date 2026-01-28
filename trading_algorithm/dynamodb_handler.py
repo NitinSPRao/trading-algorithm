@@ -111,6 +111,7 @@ class DynamoDBHandler:
         position_size: int,
         last_sell_date: Optional[str],
         trader_id: str = "main",
+        initial_capital: Optional[float] = None,
     ) -> bool:
         """
         Save trading state to DynamoDB.
@@ -122,11 +123,15 @@ class DynamoDBHandler:
             position_size: Number of shares held
             last_sell_date: ISO format datetime of last sell
             trader_id: Unique identifier for this trader instance
+            initial_capital: Starting account balance (set once at inception)
 
         Returns:
             True if successful, False otherwise
         """
         try:
+            # Load existing state to preserve initial_capital if not provided
+            existing_state = self.load_state(trader_id)
+
             item = {
                 "trader_id": trader_id,
                 "in_position": in_position,
@@ -136,6 +141,12 @@ class DynamoDBHandler:
                 "last_sell_date": last_sell_date,
                 "last_updated": datetime.now().isoformat(),
             }
+
+            # Preserve or set initial_capital
+            if initial_capital is not None:
+                item["initial_capital"] = initial_capital
+            elif "initial_capital" in existing_state:
+                item["initial_capital"] = existing_state["initial_capital"]
 
             # Convert floats to Decimal
             item = self._convert_floats_to_decimal(item)

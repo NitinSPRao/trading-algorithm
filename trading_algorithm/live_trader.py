@@ -272,14 +272,14 @@ class AlpacaLiveTrader:
             return False
             
         account_info = self.get_account_info()
-        buying_power = account_info['buying_power']
-        
-        # Calculate position size (use configured limit of buying power)
-        position_value = buying_power * self.position_size_limit
+        cash = account_info['cash']
+
+        # Calculate position size (use configured limit of available cash)
+        position_value = cash * self.position_size_limit
         shares = int(position_value // price)
-        
+
         if shares < 1:
-            logger.warning(f"Insufficient buying power for TECL at ${price}")
+            logger.warning(f"Insufficient cash for TECL at ${price}")
             return False
         
         if self.place_order('TECL', OrderSide.BUY, shares):
@@ -299,7 +299,7 @@ class AlpacaLiveTrader:
                 price=price,
                 quantity=shares,
                 success=True,
-                details={"reason": reason, "buying_power_used_pct": self.position_size_limit}
+                details={"reason": reason, "cash_used_pct": self.position_size_limit}
             )
 
             return True

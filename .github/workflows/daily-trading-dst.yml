@@ -169,6 +169,14 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
         fi
 
+    - name: Set report date
+      if: always() && steps.*.outcome != 'skipped'
+      id: set_report_date
+      run: |
+        REPORT_DATE=$(TZ='America/New_York' date '+%Y-%m-%d')
+        echo "date=$REPORT_DATE" >> $GITHUB_OUTPUT
+        echo "Report date (ET): $REPORT_DATE"
+
     - name: Send email report
       if: always() && steps.*.outcome != 'skipped'
       uses: dawidd6/action-send-mail@v3
@@ -178,7 +186,7 @@ jobs:
         secure: true
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: "Trading Report - ${{ job.status }} - $(TZ='America/New_York' date '+%Y-%m-%d')"
+        subject: Trading Report - ${{ job.status }} - ${{ steps.set_report_date.outputs.date }}
         to: ${{ secrets.EMAIL_TO }}
         from: Trading Algorithm
         body: file://logs/daily_report.txt

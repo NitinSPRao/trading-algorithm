@@ -84,6 +84,10 @@ def calculate_fund_metrics(db):
         for event in sell_events
     )
 
+    # Get initial capital from state
+    state = db.load_state(trader_id="main")
+    initial_capital = state.get('initial_capital')
+
     return {
         'fund_inception_date': fund_inception_date,
         'days_active': days_active,
@@ -91,6 +95,7 @@ def calculate_fund_metrics(db):
         'total_positions_exited': total_positions_exited,
         'total_invested': total_invested,
         'total_received': total_received,
+        'initial_capital': initial_capital,
     }
 
 
@@ -130,6 +135,7 @@ def generate_daily_report(trader, entered_today, exited_today):
         'total_positions_exited': fund_metrics['total_positions_exited'],
         'total_invested': fund_metrics['total_invested'],
         'total_received': fund_metrics['total_received'],
+        'initial_capital': fund_metrics['initial_capital'],
         'current_balance': None,
         'total_returns_pct': None,
         'annualized_returns_pct': None,
@@ -227,29 +233,25 @@ def generate_daily_report(trader, entered_today, exited_today):
     account_info = trader.get_account_info()
     report['current_balance'] = account_info['portfolio_value']
 
-    # Calculate returns if we have invested capital
-    if report['total_invested'] > 0:
-        # Current value = cash received from sells + current position value (if any)
-        current_value = report['total_received']
-        if report['position_current_value']:
-            current_value += report['position_current_value']
-        else:
-            # If no position, current value is just the account balance
-            current_value = report['current_balance']
+    # Calculate returns based on initial capital vs current balance
+    if report['initial_capital']:
+        initial_capital = report['initial_capital']
+        current_balance = report['current_balance']
 
-        # Total returns percentage
-        total_returns = ((current_value - report['total_invested']) / report['total_invested']) * 100
+        # Total returns percentage: (current - initial) / initial
+        total_returns = ((current_balance - initial_capital) / initial_capital) * 100
         report['total_returns_pct'] = round(total_returns, 2)
 
         # Annualized returns (only if fund has been active for at least 1 day)
         if report['fund_days_active'] > 0:
             years_active = report['fund_days_active'] / 365.25
-            # Annualized return = ((current_value / total_invested) ^ (1 / years)) - 1
-            annualized_returns = (((current_value / report['total_invested']) ** (1 / years_active)) - 1) * 100
+            # Annualized return = ((current / initial) ^ (1 / years)) - 1
+            annualized_returns = (((current_balance / initial_capital) ** (1 / years_active)) - 1) * 100
             report['annualized_returns_pct'] = round(annualized_returns, 2)
         else:
             report['annualized_returns_pct'] = 0.0
     else:
+        # Fallback if initial_capital not set (shouldn't happen after migration)
         report['total_returns_pct'] = 0.0
         report['annualized_returns_pct'] = 0.0
 
@@ -279,7 +281,8 @@ def format_report_text(report):
     lines.append(f"   Days fund has been active: {report['fund_days_active']} Days")
     lines.append(f"   Total number of positions entered: {report['total_positions_entered']}")
     lines.append(f"   Total number of positions exited: {report['total_positions_exited']}")
-    lines.append(f"   Total invested: ${format_number(report['total_invested'])}")
+    if report['initial_capital']:
+        lines.append(f"   Initial capital: ${format_number(report['initial_capital'])}")
     lines.append(f"   Current balance: ${format_number(report['current_balance'])}")
     lines.append(f"   Total returns: {report['total_returns_pct']}%")
     lines.append(f"   Annualized returns: {report['annualized_returns_pct']}%")
