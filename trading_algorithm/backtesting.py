@@ -64,7 +64,11 @@ def calculate_indicators(merged_df):
     Calculate the indicators:
       - 30-day simple moving average (SMA) for TECL using the 'Open_tecl' column.
       - 30-day weighted moving average (WMA) for VIX using the 'OPEN_vix' column.
+
+    IMPORTANT: Indicators are shifted by 1 day to avoid look-ahead bias.
+    This means on day T, we use the SMA/WMA calculated from days T-30 to T-1.
     """
+    # Calculate rolling averages
     merged_df["SMA_tecl"] = merged_df["Open_tecl"].rolling(window=30, min_periods=30).mean()
     weights = np.arange(1, 31)
     merged_df["WMA_vix"] = (
@@ -72,6 +76,12 @@ def calculate_indicators(merged_df):
         .rolling(window=30, min_periods=30)
         .apply(lambda x: np.dot(x, weights) / weights.sum(), raw=True)
     )
+
+    # Shift indicators by 1 day to use only historical data
+    # On day T, SMA_tecl and WMA_vix reflect data from T-30 to T-1 (not including T)
+    merged_df["SMA_tecl"] = merged_df["SMA_tecl"].shift(1)
+    merged_df["WMA_vix"] = merged_df["WMA_vix"].shift(1)
+
     return merged_df
 
 
@@ -100,9 +110,13 @@ def annualized_return(starting_fund, final_fund, start_date, end_date):
     return return_value * 100
 
 
-def fetch_live_data():
+def fetch_live_data(use_vxx=False):
     """
-    Fetch historical data from Alpaca (TECL) and Yahoo Finance (VIX).
+    Fetch historical data from Alpaca (TECL) and either Yahoo Finance (VIX) or Alpaca (VXX).
+
+    Args:
+        use_vxx: If True, fetch VXX from Alpaca instead of VIX from Yahoo Finance
+
     Returns DataFrames ready for backtesting.
     """
     import yfinance as yf
@@ -110,7 +124,8 @@ def fetch_live_data():
     from alpaca.data.requests import StockBarsRequest
     from alpaca.data.timeframe import TimeFrame
 
-    print("📡 Fetching live data from APIs...")
+    volatility_symbol = "VXX" if use_vxx else "VIX"
+    print(f"📡 Fetching live data from APIs (using {volatility_symbol})...")
 
     # Get Alpaca credentials
     api_key = os.getenv('ALPACA_API_KEY')
@@ -119,14 +134,15 @@ def fetch_live_data():
     if not api_key or not secret_key:
         raise ValueError("Alpaca API credentials not found. Check your .env file.")
 
-    # Fetch TECL data from Alpaca
-    print("   Fetching TECL data from Alpaca...")
+    # Initialize Alpaca client
     data_client = StockHistoricalDataClient(api_key, secret_key)
 
     # Get maximum available data (Alpaca free tier: ~2016 to present)
     end_date = datetime.now()
     start_date = datetime(2016, 1, 1)  # Alpaca's data starts around here
 
+    # Fetch TECL data from Alpaca
+    print("   Fetching TECL data from Alpaca...")
     request = StockBarsRequest(
         symbol_or_symbols=['TECL'],
         timeframe=TimeFrame.Day,
@@ -155,24 +171,54 @@ def fetch_live_data():
     tecl_df['Date'] = pd.to_datetime(tecl_df['Date'])
     print(f"   ✅ TECL: {len(tecl_df)} days ({tecl_df['Date'].min().date()} to {tecl_df['Date'].max().date()})")
 
-    # Fetch VIX data from Yahoo Finance
-    print("   Fetching VIX data from Yahoo Finance...")
-    vix = yf.Ticker('^VIX')
-    vix_hist = vix.history(start=start_date, end=end_date)
+    # Fetch volatility data (VXX from Alpaca or VIX from Yahoo Finance)
+    if use_vxx:
+        print("   Fetching VXX data from Alpaca...")
+        request_vxx = StockBarsRequest(
+            symbol_or_symbols=['VXX'],
+            timeframe=TimeFrame.Day,
+            start=start_date,
+            end=end_date
+        )
 
-    if vix_hist.empty:
-        raise ValueError("No VIX data returned from Yahoo Finance")
+        bars_vxx = data_client.get_stock_bars(request_vxx)
 
-    # Convert to DataFrame with consistent format
-    vix_df = pd.DataFrame({
-        'Date': vix_hist.index.date,
-        'OPEN': vix_hist['Open'].values,
-        'HIGH': vix_hist['High'].values,
-        'LOW': vix_hist['Low'].values,
-        'CLOSE': vix_hist['Close'].values
-    })
-    vix_df['Date'] = pd.to_datetime(vix_df['Date'])
-    print(f"   ✅ VIX: {len(vix_df)} days ({vix_df['Date'].min().date()} to {vix_df['Date'].max().date()})")
+        if 'VXX' not in bars_vxx.data or not bars_vxx.data['VXX']:
+            raise ValueError("No VXX data returned from Alpaca")
+
+        # Convert to DataFrame with consistent format
+        vxx_data = []
+        for bar in bars_vxx.data['VXX']:
+            vxx_data.append({
+                'Date': bar.timestamp.date(),
+                'OPEN': float(bar.open),
+                'HIGH': float(bar.high),
+                'LOW': float(bar.low),
+                'CLOSE': float(bar.close),
+                'Volume': int(bar.volume)
+            })
+
+        vix_df = pd.DataFrame(vxx_data)
+        vix_df['Date'] = pd.to_datetime(vix_df['Date'])
+        print(f"   ✅ VXX: {len(vix_df)} days ({vix_df['Date'].min().date()} to {vix_df['Date'].max().date()})")
+    else:
+        print("   Fetching VIX data from Yahoo Finance...")
+        vix = yf.Ticker('^VIX')
+        vix_hist = vix.history(start=start_date, end=end_date)
+
+        if vix_hist.empty:
+            raise ValueError("No VIX data returned from Yahoo Finance")
+
+        # Convert to DataFrame with consistent format
+        vix_df = pd.DataFrame({
+            'Date': vix_hist.index.date,
+            'OPEN': vix_hist['Open'].values,
+            'HIGH': vix_hist['High'].values,
+            'LOW': vix_hist['Low'].values,
+            'CLOSE': vix_hist['Close'].values
+        })
+        vix_df['Date'] = pd.to_datetime(vix_df['Date'])
+        print(f"   ✅ VIX: {len(vix_df)} days ({vix_df['Date'].min().date()} to {vix_df['Date'].max().date()})")
 
     print("✅ Data fetched successfully!\n")
 
@@ -303,15 +349,22 @@ def backtest_trading(merged_df, initial_fund=10000):
     return trades, fund, bank  # Return bank along with trades and fund
 
 
-def main(use_live_data=False):
-    """Main entry point for backtesting."""
+def main(use_live_data=False, use_vxx=False):
+    """Main entry point for backtesting.
+
+    Args:
+        use_live_data: If True, fetch data from APIs instead of CSV files
+        use_vxx: If True, use VXX instead of VIX (only applies when use_live_data=True)
+    """
     starting_fund = 10000
 
     if use_live_data:
-        print("🔴 LIVE DATA MODE - Fetching from APIs")
+        volatility_source = "VXX (Alpaca)" if use_vxx else "VIX (Yahoo Finance)"
+        print(f"🔴 LIVE DATA MODE - Fetching from APIs")
+        print(f"   Volatility Source: {volatility_source}")
         print("=" * 50)
         # Fetch data from APIs
-        tecl_df, vix_df = fetch_live_data()
+        tecl_df, vix_df = fetch_live_data(use_vxx=use_vxx)
 
         # Add suffixes
         tecl_df = add_suffix(tecl_df, "_tecl")
@@ -406,8 +459,11 @@ Examples:
   # Use CSV files (default)
   python -m trading_algorithm.backtesting
 
-  # Fetch fresh data from APIs
+  # Fetch fresh data from APIs using VIX from Yahoo Finance
   python -m trading_algorithm.backtesting --live-data
+
+  # Fetch fresh data from APIs using VXX from Alpaca
+  python -m trading_algorithm.backtesting --live-data --use-vxx
         """
     )
     parser.add_argument(
@@ -415,9 +471,18 @@ Examples:
         action='store_true',
         help='Fetch fresh data from Alpaca and Yahoo Finance APIs instead of using CSV files'
     )
+    parser.add_argument(
+        '--use-vxx',
+        action='store_true',
+        help='Use VXX from Alpaca instead of VIX from Yahoo Finance (requires --live-data)'
+    )
 
     args = parser.parse_args()
-    main(use_live_data=args.live_data)
+
+    if args.use_vxx and not args.live_data:
+        parser.error("--use-vxx requires --live-data")
+
+    main(use_live_data=args.live_data, use_vxx=args.use_vxx)
 
 
 if __name__ == "__main__":
