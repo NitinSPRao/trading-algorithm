@@ -1,0 +1,3 @@
+# DISABLED - Production version now running in Flembot
+# To re-enable: rename this file back to daily-trading-dst.yml
+# Original workflow moved to daily-trading-dst.yml.disabled
